@@ -9,12 +9,12 @@ class Exsicata extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
 
-    protected $fillable = ['name', 'autor', 'escavaninho', 'coletor', 'data', 'determinador', 'quantidade', 'bdd', 'image', 'endereco_id', 'genero_id', 'familia_id'
+    protected $fillable = ['name', 'autor', 'escavaninho', 'coletor', 'data', 'determinador', 'quantidade', 'bdd', 'image', 'genero_id', 'familia_id'
     ];
 
     public function endereco()
     {
-        return $this->belongsTo(Endereco::class);
+        return $this->hasOne(Endereco::class);
     }
 
     public function familia()

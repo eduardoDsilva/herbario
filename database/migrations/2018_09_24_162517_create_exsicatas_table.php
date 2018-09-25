@@ -24,8 +24,6 @@ class CreateExsicatasTable extends Migration
             $table->integer('quantidade');
             $table->string('bdd');
             $table->text('image')->nullable();
-            $table->unsignedInteger('endereco_id');
-            $table->foreign('endereco_id')->references('id')->on('enderecos')->onDelete('cascade');
             $table->unsignedInteger('genero_id');
             $table->foreign('genero_id')->references('id')->on('generos')->onDelete('cascade');
             $table->unsignedInteger('epiteto_id');

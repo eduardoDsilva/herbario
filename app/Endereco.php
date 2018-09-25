@@ -9,11 +9,11 @@ class Endereco extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
-        'municipio', 'uf', 'pais', 'local', 'latitude', 'longitude', 'habitat', 'observacao',
+        'municipio', 'uf', 'pais', 'local', 'latitude', 'longitude', 'habitat', 'observacao', 'exsicata_id',
     ];
 
     public function exsicata()
     {
-        return $this->hasMany(Exsicata::class);
+        return $this->belongsTo(Exsicata::class);
     }
 }

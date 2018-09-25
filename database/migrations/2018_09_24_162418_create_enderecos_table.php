@@ -23,6 +23,8 @@ class CreateEnderecosTable extends Migration
             $table->string('longitude');
             $table->string('habitat');
             $table->string('observacao');
+            $table->unsignedInteger('exsicata_id');
+            $table->foreign('exsicata_id')->references('id')->on('exsicatas')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
