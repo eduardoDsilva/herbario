@@ -15,14 +15,15 @@ class CreateExsicatasTable extends Migration
     {
         Schema::create('exsicatas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('autor');
-            $table->string('escavaninho');
+            $table->integer('numero');
+            $table->string('name')->nullable();
+            $table->string('autor')->nullable();
+            $table->string('escavaninho')->nullable();
             $table->string('coletor');
             $table->date('data');
-            $table->string('determinador');
-            $table->integer('quantidade');
-            $table->string('bdd');
+            $table->string('determinador')->nullable();
+            $table->integer('quantidade')->nullable();
+            $table->string('bdd')->nullable();
             $table->longtext('image')->nullable();
             $table->unsignedInteger('genero_id');
             $table->foreign('genero_id')->references('id')->on('generos')->onDelete('cascade');

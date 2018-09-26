@@ -19,10 +19,10 @@ class CreateEnderecosTable extends Migration
             $table->string('uf');
             $table->string('pais');
             $table->longtext('local');
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->string('habitat');
-            $table->longtext('observacao');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
+            $table->string('habitat')->nullable();
+            $table->longtext('observacao')->nullable();
             $table->unsignedInteger('exsicata_id');
             $table->foreign('exsicata_id')->references('id')->on('exsicatas')->onDelete('cascade');
             $table->softDeletes();
