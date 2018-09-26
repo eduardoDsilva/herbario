@@ -18,11 +18,11 @@ class CreateEnderecosTable extends Migration
             $table->string('municipio');
             $table->string('uf');
             $table->string('pais');
-            $table->string('local');
+            $table->longtext('local');
             $table->string('latitude');
             $table->string('longitude');
             $table->string('habitat');
-            $table->string('observacao');
+            $table->longtext('observacao');
             $table->unsignedInteger('exsicata_id');
             $table->foreign('exsicata_id')->references('id')->on('exsicatas')->onDelete('cascade');
             $table->softDeletes();

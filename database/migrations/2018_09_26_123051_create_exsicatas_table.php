@@ -23,7 +23,7 @@ class CreateExsicatasTable extends Migration
             $table->string('determinador');
             $table->integer('quantidade');
             $table->string('bdd');
-            $table->text('image')->nullable();
+            $table->longtext('image')->nullable();
             $table->unsignedInteger('genero_id');
             $table->foreign('genero_id')->references('id')->on('generos')->onDelete('cascade');
             $table->unsignedInteger('epiteto_id');
