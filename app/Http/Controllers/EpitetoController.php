@@ -13,7 +13,7 @@ class EpitetoController extends Controller
      */
     public function index()
     {
-        //
+        return view('epiteto.index');
     }
 
     /**

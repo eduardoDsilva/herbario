@@ -147,7 +147,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
-
+        Skydiver\LaravelMaterializeCSS\MaterializeCSSServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Lubusin\Decomposer\DecomposerServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
@@ -216,6 +216,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'MaterializeCSS' => Skydiver\LaravelMaterializeCSS\MaterializeCSS::class,
 
     ],
 

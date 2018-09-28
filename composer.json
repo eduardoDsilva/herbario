@@ -15,7 +15,9 @@
         "orangehill/iseed": "dev-master",
         "owen-it/laravel-auditing": "^8.0",
         "rap2hpoutre/laravel-log-viewer": "^0.22.0",
-        "zizaco/entrust": "5.2.x-dev"
+        "zizaco/entrust": "5.2.x-dev",
+        "skydiver/laravel-materialize-css": "dev-master"
+
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

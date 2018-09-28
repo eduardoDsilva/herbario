@@ -13,7 +13,7 @@ class ExsicataController extends Controller
      */
     public function index()
     {
-        //
+        return view('exsicata.index');
     }
 
     /**

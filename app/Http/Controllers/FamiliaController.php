@@ -13,7 +13,7 @@ class FamiliaController extends Controller
      */
     public function index()
     {
-        //
+        return view('familia.index');
     }
 
     /**
