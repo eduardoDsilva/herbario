@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PermissionController extends Controller
+class PermissionController extends Controller implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     /**
      * Display a listing of the resource.
      *

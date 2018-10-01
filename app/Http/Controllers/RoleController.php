@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
+use App\Role;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -13,7 +15,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('admin.role.index');
+        $data = Role::all();
+        return view('admin.role.index', compact('data'));
     }
 
     /**
@@ -23,7 +26,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        $data = Permission::all();
+        return view('admin.role.create', compact('data'));
     }
 
     /**
@@ -34,7 +38,8 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->all();
+        $
     }
 
     /**

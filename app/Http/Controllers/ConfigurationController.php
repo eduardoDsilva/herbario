@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class EpitetoController extends Controller implements Auditable
+class ConfigurationController extends Controller implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
 
@@ -15,7 +15,7 @@ class EpitetoController extends Controller implements Auditable
      */
     public function index()
     {
-        return view('epiteto.index');
+        return view('configuration.index');
     }
 
     /**
