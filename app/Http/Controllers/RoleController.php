@@ -16,7 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $data = Role::all();
+        $data = Role::orderBy('name', 'asc')->get();
         return view('admin.role.index', compact('data'));
     }
 
@@ -27,7 +27,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $data = Permission::all();
+        $data = Permission::orderBy('name', 'asc')->get();
         return view('admin.role.create', compact('data'));
     }
 

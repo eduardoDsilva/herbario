@@ -16,8 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        $roles = Role::all();
+        $users = User::orderBy('name', 'asc')->get();
+        $roles = Role::orderBy('name', 'asc')->get();
         return view('admin.user.index', compact('users', 'roles'));
     }
 
@@ -28,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $roles = Role::orderBy('name', 'asc')->get();
         return view('admin.user.create', compact('roles'));
     }
 
@@ -73,7 +73,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $roles = Role::orderBy('name', 'asc')->get();
+        return view('admin.user.edit', compact('user', 'roles'));
     }
 
     /**
@@ -85,13 +87,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $dataForm = $request->all();
         $user = User::find($id);
+        $user->update($dataForm);
         $roles = $request->roles;
         DB::table('role_user')->where('user_id', $id)->delete();
         foreach($roles as $role) {
             $user->attachRole($role);
         }
-        return back()->withMessage('Updated');
+        return redirect()->route('users.index');
     }
 
     /**

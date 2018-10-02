@@ -35,6 +35,9 @@
                         <td>@foreach($user->role as $role){{$role->display_name}}<br>@endforeach</td>
                         <td>
                             <a class="modal-trigger tooltipped" data-position="top" data-delay="50"
+                               data-tooltip="Editar" href="{{route('users.edit', $user->id)}}"> <i
+                                        class="small material-icons">edit</i></a>
+                            <a class="modal-trigger tooltipped" data-position="top" data-delay="50"
                                data-tooltip="Editar" href="#modal1"> <i
                                         class="small material-icons">settings</i></a>
                             <!-- Modal Structure -->
