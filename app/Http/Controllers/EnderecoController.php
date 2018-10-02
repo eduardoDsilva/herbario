@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class EnderecoController extends Controller implements Auditable
+class EnderecoController extends Controller
 {
-    use \OwenIt\Auditing\Auditable;
-
     /**
      * Display a listing of the resource.
      *

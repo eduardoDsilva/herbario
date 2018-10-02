@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class GeneroController extends Controller implements Auditable
+class GeneroController extends Controller
 {
-    use \OwenIt\Auditing\Auditable;
-
     /**
      * Display a listing of the resource.
      *

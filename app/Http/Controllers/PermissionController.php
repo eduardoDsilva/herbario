@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use Illuminate\Http\Request;
 
-class PermissionController extends Controller implements Auditable
+class PermissionController extends Controller
 {
-    use \OwenIt\Auditing\Auditable;
-
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +14,8 @@ class PermissionController extends Controller implements Auditable
      */
     public function index()
     {
-        return view('admin.permission.index');
+        $data = Permission::all();
+        return view('admin.permission.index', compact('data'));
     }
 
     /**
@@ -25,7 +25,7 @@ class PermissionController extends Controller implements Auditable
      */
     public function create()
     {
-        //
+        return view('admin.permission.create');
     }
 
     /**
@@ -36,7 +36,9 @@ class PermissionController extends Controller implements Auditable
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->all();
+        $permission = Permission::create($dataForm);
+        return redirect()->route('permissions.index');
     }
 
     /**
@@ -58,7 +60,8 @@ class PermissionController extends Controller implements Auditable
      */
     public function edit($id)
     {
-        //
+        $data = Permission::find($id);
+        return view('admin.permission.edit', compact('data'));
     }
 
     /**
@@ -70,7 +73,10 @@ class PermissionController extends Controller implements Auditable
      */
     public function update(Request $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $permission = Permission::find($id);
+        $permission->update($dataForm);
+        return redirect()->route('permissions.index');
     }
 
     /**

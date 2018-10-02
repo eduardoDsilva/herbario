@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Permission;
 use App\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -39,7 +40,11 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $dataForm = $request->all();
-        $
+        $role = Role::create($dataForm);
+        foreach($dataForm['permission'] as $data){
+            $role->permission()->attach($data);
+        }
+        return redirect()->route("roles.index");
     }
 
     /**
@@ -61,7 +66,9 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Role::find($id);
+        $permissions = Permission::all();
+        return view('admin.role.edit', compact('data', 'permissions'));
     }
 
     /**
@@ -73,7 +80,14 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $role = Role::find($id);
+        $role->update($dataForm);
+        DB::table('permission_role')->where('role_id', $id)->delete();
+        foreach($dataForm['permission'] as $permission){
+            $role->attachPermission($permission);
+        }
+        return redirect()->route("roles.index");
     }
 
     /**

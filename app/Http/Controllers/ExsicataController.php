@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ExsicataController extends Controller implements Auditable
+class ExsicataController extends Controller
 {
-    use \OwenIt\Auditing\Auditable;
-
     /**
      * Display a listing of the resource.
      *

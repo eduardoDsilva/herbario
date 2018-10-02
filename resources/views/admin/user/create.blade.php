@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h3>Criar papéis</h3>
+        <h3>Criar usuário</h3>
         <div class="divider"></div>
         <div class="section">
             <nav class="green darken-2">
@@ -10,41 +10,45 @@
                     <div class="col s12">
                         <a href="{{route('home')}}" class="breadcrumb">Home</a>
                         <a href="{{route('configurations.index')}}" class="breadcrumb">Configurações</a>
-                        <a href="{{route('roles.index')}}" class="breadcrumb">Papeis</a>
-                        <a href="{{route('roles.create')}}" class="breadcrumb">Criar papel</a>
+                        <a href="{{route('users.index')}}" class="breadcrumb">Usuários</a>
+                        <a href="{{route('users.create')}}" class="breadcrumb">Criar usuário</a>
                     </div>
                 </div>
             </nav>
         </div>
         <div class="card">
             <div class="row">
-                <form class="col s12" method="POST" action="{{route('roles.store')}}">
+                <form class="col s12" method="POST" action="{{route('users.store')}}">
                     @csrf
                     <div class="section">
                         <div class="row">
                             <div class="input-field col s12">
                                 <input id="name" name="name" type="text" class="validate">
-                                <label for="name">Nome do papel</label>
+                                <label for="name">Nome</label>
                             </div>
                             <div class="input-field col s12">
-                                <input id="display_name" name="display_name" type="text" class="validate">
-                                <label for="display_name">Nome em tela</label>
+                                <input id="email" name="email" type="email" class="validate">
+                                <label for="email">E-mail</label>
                             </div>
                             <div class="input-field col s12">
-                                <input id="description" name="description" type="text" class="validate">
-                                <label for="description">Descrição</label>
+                                <input id="username" name="username" type="text" class="validate">
+                                <label for="username">Usuário</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="password" name="password" type="password" class="validate">
+                                <label for="password">Senha</label>
                             </div>
                         </div>
                     </div>
                     <div class="section">
-                        <h4>Permissões</h4>
+                        <h4>Papéis</h4>
                         <div class="divider"></div>
                         <div class="row">
-                            @foreach($data as $permission)
+                            @foreach($roles as $role)
                                 <p class="input-field col s6 m6 l6">
                                     <label>
-                                        <input type="checkbox" name="permission[]" value="{{$permission->id}}"/>
-                                        <span>{{$permission->name}}</span>
+                                        <input type="checkbox" name="roles[]" value="{{$role->id}}"/>
+                                        <span>{{$role->display_name}}</span>
                                     </label>
                                 </p>
                             @endforeach

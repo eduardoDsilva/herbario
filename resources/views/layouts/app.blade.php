@@ -9,97 +9,93 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {!! MaterializeCSS::include_all() !!}
+
+    <link href="{{ asset('css/herbario.css') }}" rel="stylesheet">
+
     <script src="{{ asset('js/herbario.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/herbario.css') }}" rel="stylesheet">
+
 </head>
 <body>
-<div id="app">
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #4CAF50;">
-            <div class="container">
-                <a class="navbar-brand" href="#">Jardim Botânico</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{route('home')}}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Sobre</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contato</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Herbário Virtual
+<header>
+    <div class="navbar-fixed">
+        <!-- Dropdown Structure -->
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="sass.html">Exsicatas</a></li>
+            <li class="divider"></li>
+            <li><a href="badges.html">Epitetos</a></li>
+            <li><a href="badges.html">Famílias</a></li>
+            <li><a href="badges.html">Gêneros</a></li>
+        </ul>
+        <nav class="green green darken-2">
+            <div class="nav-wrapper green green darken-2 container">
+                <a href="#" class="brand-logo">Jardim Botânico</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="{{route('home')}}">Home</a></li>
+                    <li><a href="">Sobre</a></li>
+                    <li><a href="">Contato</a></li>
+                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Herbário Virtual<i
+                                    class="material-icons right">arrow_drop_down</i></a></li>
+                    @auth
+                        <li><a href="{{route('configurations.index')}}">Configurações</a></li>
+                        <li><a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Exsicatas</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Epitetos</a>
-                                <a class="dropdown-item" href="#">Famílias</a>
-                                <a class="dropdown-item" href="#">Gêneros</a>
-                            </div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </li>
-                        @auth
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Configurações</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    @csrf
-                                </form>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{route('login')}}">Login</a>
-                            </li>
-                        @endauth
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-primary" type="submit">Search</button>
-                    </form>
-                </div>
+                    @else
+                        <li>
+                            <a href="{{route('login')}}">Login</a>
+                        </li>
+                    @endauth
+                </ul>
             </div>
         </nav>
-    </header>
-    <main class="py-4">
-        @yield('content')
-    </main>
-    <!-- Footer -->
-    <footer class="page-footer font-small blue">
+    </div>
+</header>
 
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2018 Copyright:
-            <a href="https://mdbootstrap.com/bootstrap-tutorial/"> MDBootstrap.com</a>
+<main>
+    @yield('content')
+</main>
+
+<footer class="page-footer green darken-2">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer
+                    content.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+            </div>
         </div>
-        <!-- Copyright -->
-
-    </footer>
-    <!-- Footer -->
-</div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+    </div>
+</footer>
+<script>
+    M.AutoInit();
+</script>
 </body>
 </html>
+

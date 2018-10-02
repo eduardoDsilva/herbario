@@ -146,12 +146,12 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Zizaco\Entrust\EntrustServiceProvider::class,
-        Skydiver\LaravelMaterializeCSS\MaterializeCSSServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Lubusin\Decomposer\DecomposerServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
+        Skydiver\LaravelMaterializeCSS\MaterializeCSSServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -217,7 +217,6 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'MaterializeCSS' => Skydiver\LaravelMaterializeCSS\MaterializeCSS::class,
-
     ],
 
 ];

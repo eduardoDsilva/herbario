@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class EpitetoController extends Controller implements Auditable
+class EpitetoController extends Controller
 {
-    use \OwenIt\Auditing\Auditable;
-
     /**
      * Display a listing of the resource.
      *
