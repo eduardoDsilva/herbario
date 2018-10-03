@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h3>Criar epiteto</h3>
+        <h3>Editar epiteto</h3>
         <div class="divider"></div>
         <div class="section">
             <nav class="green darken-2">
@@ -11,19 +11,20 @@
                         <a href="{{route('home')}}" class="breadcrumb">Home</a>
                         <a href="" class="breadcrumb">Herbário Virtual</a>
                         <a href="{{route('epitetos.index')}}" class="breadcrumb">Epitetos</a>
-                        <a href="{{route('epitetos.create')}}" class="breadcrumb">Criar epiteto</a>
+                        <a href="{{route('epitetos.edit', $epiteto->id)}}" class="breadcrumb">Editar epiteto</a>
                     </div>
                 </div>
             </nav>
         </div>
         <div class="card">
             <div class="row">
-                <form class="col s12" method="POST" action="{{route('epitetos.store')}}">
+                <form class="col s12" method="POST" action="{{route('epitetos.update', $epiteto->id)}}">
                     @csrf
+                    <input type="hidden" name="_method" value="PUT">
                     <div class="section">
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="name" name="name" type="text" class="validate">
+                                <input id="name" name="name" type="text" class="validate" value="{{$epiteto->name}}">
                                 <label for="name">Nome</label>
                             </div>
                         </div>

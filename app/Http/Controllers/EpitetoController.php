@@ -14,7 +14,8 @@ class EpitetoController extends Controller
      */
     public function index()
     {
-        return view('epiteto.index');
+        $epitetos = Epiteto::all();
+        return view('epiteto.index', compact('epitetos'));
     }
 
     /**
@@ -24,7 +25,7 @@ class EpitetoController extends Controller
      */
     public function create()
     {
-        //
+        return view('epiteto.create');
     }
 
     /**
@@ -35,7 +36,9 @@ class EpitetoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->all();
+        $epiteto = Epiteto::create($dataForm);
+        return redirect()->route('epitetos.index');
     }
 
     /**
@@ -57,7 +60,8 @@ class EpitetoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $epiteto = Epiteto::find($id);
+        return view('epiteto.edit', compact('epiteto'));
     }
 
     /**
@@ -69,7 +73,10 @@ class EpitetoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $epiteto = Epiteto::find($id);
+        $epiteto->update($dataForm);
+        return redirect()->route('epitetos.index');
     }
 
     /**
