@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exsicata;
 use Illuminate\Http\Request;
 
 class ExsicataController extends Controller
@@ -79,6 +80,6 @@ class ExsicataController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Exsicata::find($id)->delete();
     }
 }

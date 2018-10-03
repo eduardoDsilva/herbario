@@ -48,7 +48,7 @@ class UserController extends Controller
             'password' => bcrypt($dataForm['password']),
         ]);
         $roles = $request->roles;
-        foreach($roles as $role) {
+        foreach ($roles as $role) {
             $user->attachRole($role);
         }
         return redirect()->route('users.index');
@@ -89,13 +89,18 @@ class UserController extends Controller
     {
         $dataForm = $request->all();
         $user = User::find($id);
-        $user->update($dataForm);
+        User::find($id)->update([
+            'name' => $dataForm['name'],
+            'username' => strtolower($dataForm['username']),
+            'email' => strtolower($dataForm['email']),
+            'password' => bcrypt($dataForm['password']),
+        ]);
         $roles = $request->roles;
         DB::table('role_user')->where('user_id', $id)->delete();
-        foreach($roles as $role) {
+        foreach ($roles as $role) {
             $user->attachRole($role);
         }
-        return redirect()->route('users.index');
+        return redirect()->route('configurations.index');
     }
 
     /**
@@ -106,6 +111,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
     }
 }

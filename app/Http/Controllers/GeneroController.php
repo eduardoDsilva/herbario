@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Genero;
 use Illuminate\Http\Request;
 
 class GeneroController extends Controller
@@ -79,6 +80,6 @@ class GeneroController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Genero::find($id)->delete();
     }
 }

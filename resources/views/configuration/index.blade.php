@@ -44,7 +44,7 @@
                     </a>
                 </div>
                 @endability
-                @ability('admin,gerenciador', '')
+                @ability('admin,gerenciador,moderador', '')
                 <div class="col s12 m6 l6 hoverable">
                     <a href="{{route('users.index')}}">
                         <div class="card small light-blue darken-4">
@@ -59,7 +59,7 @@
                 </div>
                 @endability
                 <div class="col s12 m6 l6 hoverable">
-                    <a href="#">
+                    <a href="{{route('users.edit', \Illuminate\Support\Facades\Auth::user()->id)}}">
                         <div class="card small indigo darken-4">
                             <div class="card-content white-text">
                                 <span class="card-title">Configurações da conta</span>

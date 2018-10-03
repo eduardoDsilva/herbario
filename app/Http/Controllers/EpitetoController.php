@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Epiteto;
 use Illuminate\Http\Request;
 
 class EpitetoController extends Controller
@@ -79,6 +80,6 @@ class EpitetoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Epiteto::find($id)->delete();
     }
 }

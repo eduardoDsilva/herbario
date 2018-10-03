@@ -24,7 +24,9 @@
                     <th>Usuário</th>
                     <th>Nome</th>
                     <th>Papel</th>
+                    @ability('admin,gerenciador', '')
                     <th>Ações</th>
+                    @endability
                 </tr>
                 </thead>
                 <tbody>
@@ -34,12 +36,14 @@
                         <td>{{$user->name}}</td>
                         <td>@foreach($user->role as $role){{$role->display_name}}<br>@endforeach</td>
                         <td>
+                            @ability('admin,gerenciador', '')
                             <a class="modal-trigger tooltipped" data-position="top" data-delay="50"
                                data-tooltip="Editar" href="{{route('users.edit', $user->id)}}"> <i
                                         class="small material-icons">edit</i></a>
                             <a class="modal-trigger tooltipped" data-position="top" data-delay="50"
                                data-tooltip="Editar" href="#modal1"> <i
                                         class="small material-icons">settings</i></a>
+                            @endability
                             <!-- Modal Structure -->
                             <div id="modal1" class="modal">
                                 <form method="POST" action="{{route('users.update', $user->id)}}">

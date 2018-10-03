@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Familia;
 use Illuminate\Http\Request;
 
 class FamiliaController extends Controller
@@ -79,6 +80,6 @@ class FamiliaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Familia::find($id)->delete();
     }
 }
