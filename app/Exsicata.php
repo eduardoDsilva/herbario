@@ -9,7 +9,7 @@ class Exsicata extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
 
-    protected $fillable = ['name', 'autor', 'escavaninho', 'coletor', 'data', 'determinador', 'quantidade', 'bdd', 'image', 'genero_id', 'familia_id'
+    protected $fillable = ['numero', 'name', 'autor', 'escaninho', 'coletor', 'data', 'determinador', 'quantidade', 'bdd', 'image', 'genero_id', 'familia_id', 'epiteto_id'
     ];
 
     public function endereco()
