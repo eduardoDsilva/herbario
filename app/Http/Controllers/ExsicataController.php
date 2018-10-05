@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Endereco;
+use App\Epiteto;
 use App\Exsicata;
+use App\Familia;
+use App\Genero;
 use Illuminate\Http\Request;
 
 class ExsicataController extends Controller
@@ -14,7 +18,8 @@ class ExsicataController extends Controller
      */
     public function index()
     {
-        return view('exsicata.index');
+        $exsicatas = Exsicata::orderBy('name', 'asc')->paginate(10);
+        return view('exsicatas.index', compact('exsicatas'));
     }
 
     /**
@@ -24,7 +29,10 @@ class ExsicataController extends Controller
      */
     public function create()
     {
-        //
+        $generos = Genero::orderBy('name', 'asc')->get();
+        $familias = Familia::orderBy('name', 'asc')->get();
+        $epitetos = Epiteto::orderBy('name', 'asc')->get();
+        return view('exsicatas.create', compact('generos', 'familias', 'epitetos'));
     }
 
     /**
@@ -35,7 +43,10 @@ class ExsicataController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->all();
+        $exsicata = Exsicata::create($dataForm);
+        Endereco::create($dataForm + ['exsicata_id' => $exsicata->id]);
+        return redirect()->route('exsicatas.index');
     }
 
     /**
@@ -46,7 +57,8 @@ class ExsicataController extends Controller
      */
     public function show($id)
     {
-        //
+        $exsicata = Exsicata::find($id);
+        return view('exsicatas.show', compact('exsicata'));
     }
 
     /**
@@ -57,7 +69,11 @@ class ExsicataController extends Controller
      */
     public function edit($id)
     {
-        //
+        $exsicata = Exsicata::find($id);
+        $generos = Genero::orderBy('name', 'asc')->get();
+        $familias = Familia::orderBy('name', 'asc')->get();
+        $epitetos = Epiteto::orderBy('name', 'asc')->get();
+        return view('exsicatas.edit', compact('exsicata', 'generos', 'familias', 'epitetos'));
     }
 
     /**

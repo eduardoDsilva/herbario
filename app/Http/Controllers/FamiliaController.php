@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exsicata;
 use App\Familia;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class FamiliaController extends Controller
      */
     public function index()
     {
-        return view('familia.index');
+        $familias = Familia::orderBy('name', 'asc')->paginate(10);
+        return view('familia.index', compact('familias'));
     }
 
     /**
@@ -24,7 +26,7 @@ class FamiliaController extends Controller
      */
     public function create()
     {
-        //
+        return view('familia.create');
     }
 
     /**
@@ -35,7 +37,9 @@ class FamiliaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->all();
+        Familia::create($dataForm);
+        return redirect()->route('familias.index');
     }
 
     /**
@@ -46,7 +50,8 @@ class FamiliaController extends Controller
      */
     public function show($id)
     {
-        //
+        $exsicatas = Exsicata::where('familia_id', '=', $id)->orderBy('name', 'asc')->get();
+        return view('exsicatas.index', compact('exsicatas'));
     }
 
     /**
@@ -57,7 +62,8 @@ class FamiliaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $familia = Familia::find($id);
+        return view('familia.edit', compact('familia'));
     }
 
     /**
@@ -69,7 +75,10 @@ class FamiliaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $familia = Familia::find($id);
+        $familia->update($dataForm);
+        return redirect()->route('familias.index');
     }
 
     /**

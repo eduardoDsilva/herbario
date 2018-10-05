@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exsicata;
 use App\Genero;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class GeneroController extends Controller
      */
     public function index()
     {
-        return view('genero.index');
+        $generos = Genero::orderBy('name', 'asc')->paginate(10);
+        return view('genero.index', compact('generos'));
     }
 
     /**
@@ -24,7 +26,7 @@ class GeneroController extends Controller
      */
     public function create()
     {
-        //
+        return view('genero.create');
     }
 
     /**
@@ -35,7 +37,9 @@ class GeneroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataForm = $request->all();
+        Genero::create($dataForm);
+        return redirect()->route('generos.index');
     }
 
     /**
@@ -46,7 +50,8 @@ class GeneroController extends Controller
      */
     public function show($id)
     {
-        //
+        $exsicatas = Exsicata::where('genero_id', '=', $id)->orderBy('name', 'asc')->get();
+        return view('exsicatas.index', compact('exsicatas'));
     }
 
     /**
@@ -57,7 +62,8 @@ class GeneroController extends Controller
      */
     public function edit($id)
     {
-        //
+        $genero = Genero::find($id);
+        return view('genero.edit', compact('genero'));
     }
 
     /**
@@ -69,7 +75,10 @@ class GeneroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $genero = Genero::find($id);
+        $genero->update($dataForm);
+        return redirect()->route('generos.index');
     }
 
     /**

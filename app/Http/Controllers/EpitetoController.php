@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Epiteto;
+use App\Exsicata;
 use Illuminate\Http\Request;
 
 class EpitetoController extends Controller
@@ -14,7 +15,7 @@ class EpitetoController extends Controller
      */
     public function index()
     {
-        $epitetos = Epiteto::all();
+        $epitetos = Epiteto::orderBy('name', 'asc')->paginate(10);
         return view('epiteto.index', compact('epitetos'));
     }
 
@@ -49,7 +50,8 @@ class EpitetoController extends Controller
      */
     public function show($id)
     {
-        //
+        $exsicatas = Exsicata::where('epiteto_id', '=', $id)->orderBy('name', 'asc')->get();
+        return view('exsicatas.index', compact('exsicatas'));
     }
 
     /**

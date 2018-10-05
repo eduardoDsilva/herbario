@@ -75,7 +75,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $roles = Role::orderBy('name', 'asc')->get();
-        return view('admin.user.edit', compact('user', 'roles'));
+        return view('configuration.user.edit', compact('user', 'roles'));
     }
 
     /**
@@ -95,11 +95,6 @@ class UserController extends Controller
             'email' => strtolower($dataForm['email']),
             'password' => bcrypt($dataForm['password']),
         ]);
-        $roles = $request->roles;
-        DB::table('role_user')->where('user_id', $id)->delete();
-        foreach ($roles as $role) {
-            $user->attachRole($role);
-        }
         return redirect()->route('configurations.index');
     }
 
