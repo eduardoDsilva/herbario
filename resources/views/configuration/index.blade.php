@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @ability('admin,moderador,gerenciador,coletor', '')
     <div class="container">
         <div class="section">
             <h2>Configurações</h2>
@@ -73,4 +74,5 @@
             </div>
         </div>
     </div>
+    @endability
 @endsection

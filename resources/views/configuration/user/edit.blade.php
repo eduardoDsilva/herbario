@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @ability('admin,moderador,gerenciador,coletor', '')
     <div class="container">
         <h3>Editar usuário</h3>
         <div class="divider"></div>
@@ -10,7 +11,6 @@
                     <div class="col s12">
                         <a href="{{route('home')}}" class="breadcrumb">Home</a>
                         <a href="{{route('configurations.index')}}" class="breadcrumb">Configurações</a>
-                        <a href="{{route('users.index')}}" class="breadcrumb">Usuários</a>
                         <a href="{{route('users.edit', $user->id)}}" class="breadcrumb">Editar usuário</a>
                     </div>
                 </div>
@@ -42,20 +42,6 @@
                         </div>
                     </div>
                     <div class="section">
-                        <h4>Papéis</h4>
-                        <div class="divider"></div>
-                        <div class="row">
-                            @foreach($roles as $role)
-                                <p class="input-field col s6 m6 l6">
-                                    <label>
-                                        <input @foreach($user->role as $r) @if($r->name == $role->name) checked="checked" @endif @endforeach type="checkbox" name="roles[]" value="{{$role->id}}"/>
-                                        <span>{{$role->display_name}}</span>
-                                    </label>
-                                </p>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="section">
                         <div class="row">
                             <button class="btn waves-effect waves-light" type="submit" name="action">Enviar
                                 <i class="material-icons right">send</i>
@@ -66,4 +52,5 @@
             </div>
         </div>
     </div>
+    @endability
 @endsection
