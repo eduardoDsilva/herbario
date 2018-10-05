@@ -16,6 +16,7 @@
                 </div>
             </nav>
         </div>
+        @ability('admin,gerenciador,moderador', '')
         <div class="card">
             <div class="row">
                 <form class="col s12" method="POST" action="{{route('epitetos.update', $epiteto->id)}}">
@@ -40,4 +41,5 @@
             </div>
         </div>
     </div>
+    @endability
 @endsection

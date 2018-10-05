@@ -15,6 +15,8 @@
                 </div>
             </nav>
         </div>
+        <h4>Mostrando 1 - 10 de {{$epitetos->total()}} epitetos</h4>
+        <div class="divider"></div>
         <div class="card">
             <table class="centered responsive-table highlight bordered">
                 <thead>
@@ -33,8 +35,7 @@
                         <td>{{$epiteto->name}}</td>
                         <td>{{count($epiteto->exsicata)}}</td>
                         <td><a class="modal-trigger tooltipped" data-position="top" data-delay="50"
-                               data-tooltip="Exsicatas" href=""> <i
-                                        class="small material-icons">nature</i></a></td>
+                               data-tooltip="Exsicatas" href="{{route('epitetos.show', $epiteto->id)}}">Exsicatas deste epíteto</a></td>
                         <td>
                             @ability('admin,gerenciador,moderador', '')
                             <a class="modal-trigger tooltipped" data-position="top" data-delay="50"
@@ -48,6 +49,9 @@
                 @endforelse
                 </tbody>
             </table>
+            <div class="section">
+                {{$epitetos->links()}}
+            </div>
         </div>
         @ability('admin,gerenciador,moderador', '')
         <div class="fixed-action-btn">
