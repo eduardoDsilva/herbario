@@ -13,24 +13,24 @@ class PermissionTableSeeder extends Seeder
     {
         $permissions=[
             [
-                'name' => 'role-read',
-                'display_name' => 'Display Role Listing',
-                'description' => 'See only Listing Of Role'
+                'name' => 'lista-papel',
+                'display_name' => 'Listar papéis',
+                'description' => 'Somente permite listar os papéis'
             ],
             [
-                'name' => 'role-create',
-                'display_name' => 'Create Role',
-                'description' => 'Create New Role'
+                'name' => 'cria-papel',
+                'display_name' => 'Criar papel',
+                'description' => 'Permite criar papéis'
             ],
             [
-                'name' => 'role-edit',
-                'display_name' => 'Edit Role',
-                'description' => 'Edit Role'
+                'name' => 'edita-papel',
+                'display_name' => 'Editar papel',
+                'description' => 'Permite editar papéis'
             ],
             [
-                'name' => 'role-delete',
-                'display_name' => 'Delete Role',
-                'description' => 'Delete Role'
+                'name' => 'deleta-papel',
+                'display_name' => 'Deletar papel',
+                'description' => 'Permite deletar papéis'
             ],
             [
                 'name' => 'cadastrar-excsicata',
