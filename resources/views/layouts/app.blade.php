@@ -15,6 +15,9 @@
 
     <script src="{{ asset('js/herbario.js') }}" defer></script>
 
+    <script type="text/javascript" src="js/jquery-last.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mlens-1.7.min.js"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -26,15 +29,17 @@
     <div class="navbar-fixed">
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content">
-            <li><a href="sass.html">Exsicatas</a></li>
+            <li><a href="{{route('exsicatas.index')}}">Exsicatas</a></li>
             <li class="divider"></li>
-            <li><a href="badges.html">Epitetos</a></li>
-            <li><a href="badges.html">Famílias</a></li>
-            <li><a href="badges.html">Gêneros</a></li>
+            <li><a href="{{route('epitetos.index')}}">Epitetos</a></li>
+            <li><a href="{{route('familias.index')}}">Famílias</a></li>
+            <li><a href="{{route('generos.index')}}">Gêneros</a></li>
         </ul>
+
         <nav class="green green darken-2">
-            <div class="nav-wrapper green green darken-2 container">
+            <div class="nav-wrapper container">
                 <a href="#" class="brand-logo">Jardim Botânico</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="{{route('home')}}">Home</a></li>
                     <li><a href="">Sobre</a></li>
@@ -58,6 +63,35 @@
                         </li>
                     @endauth
                 </ul>
+
+                <ul class="sidenav" id="mobile-demo">
+                    <li><a href="{{route('home')}}">Home</a></li>
+                    <li><a href="">Sobre</a></li>
+                    <li><a href="collapsible.html">Contato</a></li>
+                    @auth
+                        <li><a href="{{route('configurations.index')}}">Configurações</a></li>
+                        <li><a href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    @endauth
+                    <li><a href="{{route('exsicatas.index')}}">Exsicatas</a></li>
+                    <li><a href="{{route('epitetos.index')}}">Epítetos</a></li>
+                    <li><a href="{{route('familias.index')}}">Famílias</a></li>
+                    <li><a href="{{route('generos.index')}}">Gêneros</a></li>
+                    @auth
+                    @else
+                        <li>
+                            <a href="{{route('login')}}">Login</a>
+                        </li>
+                    @endauth
+                </ul>
+
             </div>
         </nav>
     </div>
