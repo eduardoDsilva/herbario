@@ -25,6 +25,14 @@ Route::resource('permissions', 'PermissionController');
 
 Route::resource('users', 'UserController');
 
+Route::resource('epitetos', 'EpitetoController');
+
+Route::resource('familias', 'FamiliaController');
+
+Route::resource('generos', 'GeneroController');
+
+Route::resource('exsicatas', 'ExsicataController');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/configuracoes', 'HomeController@configuracoes')->name('configuracoes');
