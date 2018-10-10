@@ -15,8 +15,8 @@ class EpitetoController extends Controller
      */
     public function index()
     {
-        $epitetos = Epiteto::orderBy('name', 'asc')->paginate(10);
-        return view('epiteto.index', compact('epitetos'));
+        $data = Epiteto::orderBy('name', 'asc')->paginate(10);
+        return view('epiteto.index', compact('data'));
     }
 
     /**
@@ -38,7 +38,7 @@ class EpitetoController extends Controller
     public function store(Request $request)
     {
         $dataForm = $request->all();
-        $epiteto = Epiteto::create($dataForm);
+        Epiteto::create($dataForm);
         return redirect()->route('epitetos.index');
     }
 
@@ -50,8 +50,8 @@ class EpitetoController extends Controller
      */
     public function show($id)
     {
-        $exsicatas = Exsicata::where('epiteto_id', '=', $id)->orderBy('name', 'asc')->get();
-        return view('exsicatas.index', compact('exsicatas'));
+        $data = Exsicata::where('epiteto_id', '=', $id)->orderBy('name', 'asc')->paginate(10);
+        return view('exsicatas.index', compact('data'));
     }
 
     /**
@@ -62,8 +62,8 @@ class EpitetoController extends Controller
      */
     public function edit($id)
     {
-        $epiteto = Epiteto::find($id);
-        return view('epiteto.edit', compact('epiteto'));
+        $data = Epiteto::find($id);
+        return view('epiteto.edit', compact('data'));
     }
 
     /**
@@ -76,8 +76,7 @@ class EpitetoController extends Controller
     public function update(Request $request, $id)
     {
         $dataForm = $request->all();
-        $epiteto = Epiteto::find($id);
-        $epiteto->update($dataForm);
+        Epiteto::find($id)->update($dataForm);
         return redirect()->route('epitetos.index');
     }
 
@@ -89,6 +88,6 @@ class EpitetoController extends Controller
      */
     public function destroy($id)
     {
-        Epiteto::find($id)->delete();
+        Epiteto::delete($id);
     }
 }

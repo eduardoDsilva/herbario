@@ -15,8 +15,8 @@ class FamiliaController extends Controller
      */
     public function index()
     {
-        $familias = Familia::orderBy('name', 'asc')->paginate(10);
-        return view('familia.index', compact('familias'));
+        $data = Familia::orderBy('name', 'asc')->paginate(10);
+        return view('familia.index', compact('data'));
     }
 
     /**
@@ -50,8 +50,8 @@ class FamiliaController extends Controller
      */
     public function show($id)
     {
-        $exsicatas = Exsicata::where('familia_id', '=', $id)->orderBy('name', 'asc')->get();
-        return view('exsicatas.index', compact('exsicatas'));
+        $data = Exsicata::where('familia_id', '=', $id)->orderBy('name', 'asc')->paginate(10);
+        return view('exsicatas.index', compact('data'));
     }
 
     /**
@@ -62,8 +62,8 @@ class FamiliaController extends Controller
      */
     public function edit($id)
     {
-        $familia = Familia::find($id);
-        return view('familia.edit', compact('familia'));
+        $data = Familia::find($id);
+        return view('familia.edit', compact('data'));
     }
 
     /**
@@ -76,8 +76,7 @@ class FamiliaController extends Controller
     public function update(Request $request, $id)
     {
         $dataForm = $request->all();
-        $familia = Familia::find($id);
-        $familia->update($dataForm);
+        Familia::find($id)->update($dataForm);
         return redirect()->route('familias.index');
     }
 
@@ -89,6 +88,6 @@ class FamiliaController extends Controller
      */
     public function destroy($id)
     {
-        Familia::find($id)->delete();
+        Familia::delete($id);
     }
 }

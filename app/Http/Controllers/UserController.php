@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -16,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('name', 'asc')->get();
+        $users = User::orderBy('name', 'asc')->paginate(10);
         $roles = Role::orderBy('name', 'asc')->get();
         return view('admin.user.index', compact('users', 'roles'));
     }
@@ -88,7 +87,6 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $dataForm = $request->all();
-        $user = User::find($id);
         User::find($id)->update([
             'name' => $dataForm['name'],
             'username' => strtolower($dataForm['username']),
@@ -106,6 +104,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
+        User::delete($id);
     }
 }

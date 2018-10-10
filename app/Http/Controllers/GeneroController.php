@@ -15,8 +15,8 @@ class GeneroController extends Controller
      */
     public function index()
     {
-        $generos = Genero::orderBy('name', 'asc')->paginate(10);
-        return view('genero.index', compact('generos'));
+        $data = Genero::orderBy('name', 'asc')->paginate(10);
+        return view('genero.index', compact('data'));
     }
 
     /**
@@ -50,8 +50,8 @@ class GeneroController extends Controller
      */
     public function show($id)
     {
-        $exsicatas = Exsicata::where('genero_id', '=', $id)->orderBy('name', 'asc')->get();
-        return view('exsicatas.index', compact('exsicatas'));
+        $data = Exsicata::where('genero_id', '=', $id)->orderBy('name', 'asc')->paginate(10);
+        return view('exsicatas.index', compact('data'));
     }
 
     /**
@@ -62,8 +62,8 @@ class GeneroController extends Controller
      */
     public function edit($id)
     {
-        $genero = Genero::find($id);
-        return view('genero.edit', compact('genero'));
+        $data = Genero::find($id);
+        return view('genero.edit', compact('data'));
     }
 
     /**
@@ -76,8 +76,7 @@ class GeneroController extends Controller
     public function update(Request $request, $id)
     {
         $dataForm = $request->all();
-        $genero = Genero::find($id);
-        $genero->update($dataForm);
+        Genero::find($id)->update($dataForm);
         return redirect()->route('generos.index');
     }
 
@@ -89,6 +88,6 @@ class GeneroController extends Controller
      */
     public function destroy($id)
     {
-        Genero::find($id)->delete();
+        Genero::delete($id);
     }
 }

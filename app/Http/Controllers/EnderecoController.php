@@ -80,6 +80,6 @@ class EnderecoController extends Controller
      */
     public function destroy($id)
     {
-        Endereco::find($id)->delete();
+        Endereco::delete($id);
     }
 }

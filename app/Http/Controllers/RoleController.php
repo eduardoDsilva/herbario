@@ -16,7 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $data = Role::orderBy('name', 'asc')->get();
+        $data = Role::orderBy('name', 'asc')->paginate(10);
         return view('admin.role.index', compact('data'));
     }
 
@@ -81,8 +81,7 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $dataForm = $request->all();
-        $role = Role::find($id);
-        $role->update($dataForm);
+        $role = Role::find($id)->update($dataForm);
         DB::table('permission_role')->where('role_id', $id)->delete();
         foreach($dataForm['permission'] as $permission){
             $role->attachPermission($permission);
@@ -98,6 +97,6 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        Role::find($id)->delete();
+        Role::delete($id);
     }
 }

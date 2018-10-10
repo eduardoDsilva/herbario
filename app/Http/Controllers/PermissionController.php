@@ -14,7 +14,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $data = Permission::orderBy('name', 'asc')->get();
+        $data = Permission::orderBy('name', 'asc')->paginate(10);
         return view('admin.permission.index', compact('data'));
     }
 
@@ -37,7 +37,7 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $dataForm = $request->all();
-        $permission = Permission::create($dataForm);
+        Permission::create($dataForm);
         return redirect()->route('permissions.index');
     }
 
@@ -74,8 +74,7 @@ class PermissionController extends Controller
     public function update(Request $request, $id)
     {
         $dataForm = $request->all();
-        $permission = Permission::find($id);
-        $permission->update($dataForm);
+        Permission::find($id)->update($dataForm);
         return redirect()->route('permissions.index');
     }
 
@@ -87,6 +86,6 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        Permission::find($id)->delete();
+        Permission::delete($id);
     }
 }

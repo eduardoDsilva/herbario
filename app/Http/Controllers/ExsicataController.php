@@ -18,8 +18,21 @@ class ExsicataController extends Controller
      */
     public function index()
     {
-        $exsicatas = Exsicata::orderBy('name', 'asc')->paginate(10);
-        return view('exsicatas.index', compact('exsicatas'));
+        $data = Exsicata::paginate(10);
+        $table = true;
+        return view('exsicatas.index', compact('data', 'table'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexGrade()
+    {
+        $data = Exsicata::paginate(9);
+        $table = false;
+        return view('exsicatas.index', compact('data', 'table'));
     }
 
     /**
@@ -57,8 +70,8 @@ class ExsicataController extends Controller
      */
     public function show($id)
     {
-        $exsicata = Exsicata::find($id);
-        return view('exsicatas.show', compact('exsicata'));
+        $data = Exsicata::find($id);
+        return view('exsicatas.show', compact('data'));
     }
 
     /**
@@ -69,11 +82,11 @@ class ExsicataController extends Controller
      */
     public function edit($id)
     {
-        $exsicata = Exsicata::find($id);
+        $data = Exsicata::find($id);
         $generos = Genero::orderBy('name', 'asc')->get();
         $familias = Familia::orderBy('name', 'asc')->get();
         $epitetos = Epiteto::orderBy('name', 'asc')->get();
-        return view('exsicatas.edit', compact('exsicata', 'generos', 'familias', 'epitetos'));
+        return view('exsicatas.edit', compact('data', 'generos', 'familias', 'epitetos'));
     }
 
     /**
@@ -96,6 +109,6 @@ class ExsicataController extends Controller
      */
     public function destroy($id)
     {
-        Exsicata::find($id)->delete();
+        Exsicata::delete($id);
     }
 }
