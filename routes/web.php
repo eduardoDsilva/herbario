@@ -33,7 +33,13 @@ Route::resource('generos', 'GeneroController');
 
 Route::resource('exsicatas', 'ExsicataController');
 
+Route::get('/index-grade', 'ExsicataController@indexGrade')->name('exsicatas.index-grade');
+
+Route::resource('audits', 'AuditController');
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/herbario-virtual', 'HomeController@herbario')->name('herbario');
 
 Route::get('/configuracoes', 'HomeController@configuracoes')->name('configuracoes');
 
