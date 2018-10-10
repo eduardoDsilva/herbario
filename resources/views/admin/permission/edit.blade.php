@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @ability('admin', '')
     <div class="container">
         <h3>Editar permissão</h3>
         <div class="divider"></div>
@@ -48,4 +49,5 @@
             </div>
         </div>
     </div>
+    @endability
 @endsection

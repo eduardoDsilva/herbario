@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @ability('admin', '')
     <div class="container">
         <h3>Criar papéis</h3>
         <div class="divider"></div>
@@ -66,4 +67,5 @@
             </div>
         </div>
     </div>
+    @endability
 @endsection

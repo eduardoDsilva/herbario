@@ -9,14 +9,15 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}" type="text/javascript"></script>
+
     {!! MaterializeCSS::include_all() !!}
 
     <link href="{{ asset('css/herbario.css') }}" rel="stylesheet">
 
-    <script src="{{ asset('js/herbario.js') }}" defer></script>
+    <script src="{{ asset('js/herbario.js') }}"></script>
 
-    <script type="text/javascript" src="js/jquery-last.min.js"></script>
-    <script type="text/javascript" src="js/jquery.mlens-1.7.min.js"></script>
+    <script src="{{ asset('js/jquery.elevatezoom.js') }}" type="text/javascript"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -128,7 +129,7 @@
     </div>
 </footer>
 <script>
-    M.AutoInit();
+M.AutoInit();
 </script>
 </body>
 </html>

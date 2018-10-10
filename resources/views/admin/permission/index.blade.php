@@ -17,6 +17,8 @@
                 </div>
             </nav>
         </div>
+        <h4>Mostrando 1 - 10 de {{$data->total()}} registros</h4>
+        <div class="divider"></div>
         <div class="card">
             <table class="centered responsive-table highlight bordered">
                 <thead>
@@ -24,7 +26,9 @@
                     <th>Papel</th>
                     <th>Nome em tela</th>
                     <th>Descrição</th>
+                    @ability('admin', '')
                     <th>Ações</th>
+                    @endability
                 </tr>
                 </thead>
                 <tbody>
@@ -34,6 +38,7 @@
                         <td>{{$permission->display_name}}</td>
                         <td>{{$permission->description}}</td>
                         <td>
+                            @ability('admin', '')
                             <a class="modal-trigger tooltipped" data-position="top" data-delay="50"
                                data-tooltip="Editar" href="{{route('permissions.edit', $permission->id)}}"> <i class="small material-icons">edit</i></a>
                             <a data-target="modal1" class="modal-trigger tooltipped" data-position="top" data-delay="50"
@@ -41,18 +46,23 @@
                             <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Visualizar"
                                href="#">
                                 <i class="small material-icons">library_books</i></a></td>
+                            @endability
                         @empty
                             <td>Nenhuma permissão cadastrada</td>
                     </tr>
                 @endforelse
                 </tbody>
             </table>
+            <div class="section">
+                {{$data->links()}}
+            </div>
         </div>
-
+        @ability('admin', '')
         <div class="fixed-action-btn">
             <a class="btn-floating btn-large red" href="{{route('permissions.create')}}">
                 <i class="large material-icons">add</i>
             </a>
         </div>
+        @endability
     </div>
 @endsection

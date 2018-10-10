@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @ability('admin,moderador', '')
     <div class="container">
         <h3>Criar usuário</h3>
         <div class="divider"></div>
@@ -65,4 +66,5 @@
             </div>
         </div>
     </div>
+    @endability
 @endsection
