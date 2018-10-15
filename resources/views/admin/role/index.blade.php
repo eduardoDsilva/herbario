@@ -41,11 +41,14 @@
                             <a class="modal-trigger tooltipped" data-position="top" data-delay="50"
                                data-tooltip="Editar" href="{{route('roles.edit', $papel->id)}}"> <i
                                         class="small material-icons">edit</i></a>
-                            <a data-target="modal1" class="modal-trigger tooltipped" data-position="top" data-delay="50"
-                               data-tooltip="Deletar" href="#"> <i class="small material-icons">delete</i></a>
                             <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Visualizar"
                                href="#">
-                                <i class="small material-icons">library_books</i></a></td>
+                                <i class="small material-icons">library_books</i></a>
+                            <a data-target="modal1" class="modal-trigger tooltipped" data-position="top" data-delay="50"
+                               data-tooltip="Deletar" href="#modal1" data-id="{{$papel->id}}"
+                               data-name="{{$papel->name}}"><i
+                                        class="small material-icons">delete</i></a>
+                        </td>
                         @endability
                         @empty
                             <td>Nenhum papél cadastrado</td>
@@ -64,5 +67,26 @@
             </a>
         </div>
         @endability
+    </div>
+
+    <div id="modal1" class="modal">
+        <form action="{{route('roles.destroy', 'delete')}}" method="POST">
+            @method('DELETE')
+            @csrf
+            <div class="modal-content">
+                <h4>Deletar</h4>
+                <p>Você tem certeza que deseja deletar o papel abaixo?</p>
+                <div class="row">
+                    <label for="name_delete">Nome:</label>
+                    <div class="input-field col s12">
+                        <input class="validate" hidden name="id" type="number" id="id_delete">
+                        <input disabled class="validate" type="text" id="name_delete">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn red delete" type="submit">Sim</button>
+            </div>
+        </form>
     </div>
 @endsection

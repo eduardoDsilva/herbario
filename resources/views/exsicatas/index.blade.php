@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="divider"></div>
-    <div class="card z-depth-2">
+    <div class="card">
         @if($table)
             <table class="centered responsive-table highlight bordered">
                 <thead>
@@ -58,6 +58,10 @@
                             <a class="modal-trigger tooltipped" data-position="top" data-delay="50"
                                data-tooltip="Editar" href="{{route('exsicatas.edit', $exsicata->id)}}"> <i
                                         class="small material-icons">edit</i></a>
+                            <a data-target="modal1" class="modal-trigger tooltipped" data-position="top" data-delay="50"
+                               data-tooltip="Deletar" href="#modal1" data-id="{{$exsicata->id}}"
+                               data-name="{{$exsicata->genero->name}} {{$exsicata->epiteto->name}}"><i
+                                        class="small material-icons">delete</i></a>
                         </td>
                         @endability
                         @empty
@@ -84,7 +88,13 @@
                             <div class="card-action">
                                 <a class="btn" href="{{route('exsicatas.show', $exsicata->id)}}">Acessar</a>
                                 @ability('admin,gerenciador,moderador', '')
-                                <a class="btn" href="{{route('exsicatas.edit', $exsicata->id)}}">Editar</a>
+                                <a class="btn" href="{{route('exsicatas.edit', $exsicata->id)}}"><i
+                                            class="small material-icons">edit</i></a>
+                                <a class="btn modal-trigger tooltipped" data-target="modal1" data-position="top"
+                                   data-delay="50"
+                                   data-tooltip="Deletar" href="#modal1" data-id="{{$exsicata->id}}"
+                                   data-name="{{$exsicata->genero->name}} {{$exsicata->epiteto->name}}"><i
+                                            class="small material-icons">delete</i></a>
                                 @endability
                             </div>
                         </div>
@@ -103,6 +113,26 @@
         </a>
     </div>
     @endability
+
+    <div id="modal1" class="modal">
+        <form action="{{route('exsicatas.destroy', 'delete')}}" method="POST">
+            @method('DELETE')
+            @csrf
+            <div class="modal-content">
+                <h4>Deletar</h4>
+                <p>Você tem certeza que deseja deletar a exsicata abaixo?</p>
+                <div class="row">
+                    <label for="name_delete">Nome:</label>
+                    <div class="input-field col s12">
+                        <input class="validate" hidden name="id" type="number" id="id_delete">
+                        <input disabled class="validate" type="text" id="name_delete">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn red delete" type="submit">Sim</button>
+            </div>
+        </form>
     </div>
 
 @endsection

@@ -34,6 +34,10 @@
                         <a class="modal-trigger tooltipped" data-position="top" data-delay="50"
                            data-tooltip="Editar" href="{{route('generos.edit', $genero->id)}}"> <i
                                     class="small material-icons">edit</i></a>
+                        <a data-target="modal1" class="modal-trigger tooltipped" data-position="top" data-delay="50"
+                           data-tooltip="Deletar" href="#modal1" data-id="{{$genero->id}}"
+                           data-name="{{$genero->name}}"><i
+                                    class="small material-icons">delete</i></a>
                         @endability
                     </td>
                     @empty
@@ -53,6 +57,32 @@
         </a>
     </div>
     @endability
+
+    <div id="modal1" class="modal">
+        <form action="{{route('generos.destroy', 'delete')}}" method="POST">
+            @method('DELETE')
+            @csrf
+            <div class="modal-content">
+                <h4>Deletar</h4>
+                <p>Você tem certeza que deseja deletar o gênero abaixo?</p>
+                <div class="row">
+                    <label for="id_delete">ID:</label>
+                    <div class="input-field col s12">
+                        <input class="validate" hidden name="id" type="number" id="id_delete">
+                        <input disabled class="validate" name="id" type="number" id="id_delete">
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="name_delete">Nome:</label>
+                    <div class="input-field col s12">
+                        <input disabled class="validate" type="text" id="name_delete">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn red delete" type="submit">Sim</button>
+            </div>
+        </form>
     </div>
 
 @endsection

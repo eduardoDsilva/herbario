@@ -51,7 +51,8 @@ class GeneroController extends Controller
     public function show($id)
     {
         $data = Exsicata::where('genero_id', '=', $id)->orderBy('name', 'asc')->paginate(10);
-        return view('exsicatas.index', compact('data'));
+        $table = true;
+        return view('exsicatas.index', compact('data', 'table'));
     }
 
     /**
@@ -86,8 +87,10 @@ class GeneroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        Genero::delete($id);
+        $dataForm = $request->all();
+        Genero::find($dataForm['id'])->delete();
+        return redirect()->back();
     }
 }

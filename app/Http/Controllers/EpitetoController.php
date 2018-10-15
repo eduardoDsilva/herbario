@@ -51,7 +51,8 @@ class EpitetoController extends Controller
     public function show($id)
     {
         $data = Exsicata::where('epiteto_id', '=', $id)->orderBy('name', 'asc')->paginate(10);
-        return view('exsicatas.index', compact('data'));
+        $table = true;
+        return view('exsicatas.index', compact('data', 'table'));
     }
 
     /**
@@ -86,8 +87,10 @@ class EpitetoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        Epiteto::delete($id);
+        $dataForm = $request->all();
+        Epiteto::find($dataForm['id'])->delete();
+        return redirect()->back();
     }
 }

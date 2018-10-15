@@ -51,7 +51,8 @@ class FamiliaController extends Controller
     public function show($id)
     {
         $data = Exsicata::where('familia_id', '=', $id)->orderBy('name', 'asc')->paginate(10);
-        return view('exsicatas.index', compact('data'));
+        $table = true;
+        return view('exsicatas.index', compact('data', 'table'));
     }
 
     /**
@@ -86,8 +87,10 @@ class FamiliaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        Familia::delete($id);
+        $dataForm = $request->all();
+        Familia::find($dataForm['id'])->delete();
+        return redirect()->back();
     }
 }

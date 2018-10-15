@@ -48,5 +48,5 @@
             </div>
         </div>
     </div>
-    @endbility
+    @endability
 @endsection

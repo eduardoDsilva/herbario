@@ -129,8 +129,12 @@
     </div>
 </footer>
 <script>
-M.AutoInit();
+    M.AutoInit();
+
+    $(document).on('click', '.modal-trigger', function () {
+        $('#id_delete').val($(this).data('id'));
+        $('#name_delete').val($(this).data('name'));
+    });
 </script>
 </body>
 </html>
-

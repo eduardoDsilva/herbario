@@ -44,6 +44,10 @@
                             <a class="modal-trigger tooltipped" data-position="top" data-delay="50"
                                data-tooltip="Editar" href="#modal1"> <i
                                         class="small material-icons">settings</i></a>
+                            <a data-target="modal2" class="modal-trigger tooltipped" data-position="top" data-delay="50"
+                               data-tooltip="Deletar" href="#modal1" data-id="{{$user->id}}"
+                               data-name="{{$user->name}}"><i
+                                        class="small material-icons">delete</i></a>
                             @endability
                             <!-- Modal Structure -->
                             <div id="modal1" class="modal">
@@ -95,4 +99,24 @@
         @endability
     </div>
 
+    <div id="modal2" class="modal">
+        <form action="{{route('users.destroy', 'delete')}}" method="POST">
+            @method('DELETE')
+            @csrf
+            <div class="modal-content">
+                <h4>Deletar</h4>
+                <p>Você tem certeza que deseja deletar o usuário abaixo?</p>
+                <div class="row">
+                    <label for="name_delete">Nome:</label>
+                    <div class="input-field col s12">
+                        <input class="validate" hidden name="id" type="number" id="id_delete">
+                        <input disabled class="validate" type="text" id="name_delete">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn red delete" type="submit">Sim</button>
+            </div>
+        </form>
+    </div>
 @endsection

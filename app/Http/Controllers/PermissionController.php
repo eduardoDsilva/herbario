@@ -84,8 +84,10 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        Permission::delete($id);
+        $dataForm = $request->all();
+        Permission::find($dataForm['id'])->delete();
+        return redirect()->back();
     }
 }

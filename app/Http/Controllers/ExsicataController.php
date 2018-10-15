@@ -18,7 +18,7 @@ class ExsicataController extends Controller
      */
     public function index()
     {
-        $data = Exsicata::paginate(10);
+        $data = Exsicata::paginate(9);
         $table = true;
         return view('exsicatas.index', compact('data', 'table'));
     }
@@ -107,8 +107,11 @@ class ExsicataController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        Exsicata::delete($id);
+        $dataForm = $request->all();
+        Exsicata::find($dataForm['id'])->delete();
+        Endereco::where('exsicata_id', '=', $dataForm['id'])->delete();
+        return redirect()->back();
     }
 }
