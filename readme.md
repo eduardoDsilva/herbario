@@ -16,9 +16,8 @@ Sistema em desenvolvimento do Herbário Municipal de São Leopoldo para o regist
 - **CRUD das Famílias**
 - **CRUD das Exsicatas**
 - **Importação dos dados da tabela Excel**
+- **Biblioteca de manipulação do zoom das imagens**
 - Importação de fotos para as exsicatas
-- Biblioteca de manipulação do zoom das imagens
-
 
 ## Instalação
 
