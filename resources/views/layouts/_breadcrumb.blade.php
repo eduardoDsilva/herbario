@@ -5,7 +5,9 @@
         <nav class="green darken-2">
             <div class="nav-wrapper">
                 <div class="col s12">
-                    @yield('breadcrumb')
+                    <div style="margin-left: 25px">
+                        @yield('breadcrumb')
+                    </div>
                 </div>
             </div>
         </nav>

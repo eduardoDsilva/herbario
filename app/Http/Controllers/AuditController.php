@@ -14,6 +14,7 @@ class AuditController extends Controller
      */
     public function index()
     {
+        //Busca os registros de auditoria ordenando pelos mais recentes
         $data = Audit::latest()->paginate(10);
         return view('audit.index', compact('data'));
     }

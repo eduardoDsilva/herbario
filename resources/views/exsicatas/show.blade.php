@@ -11,24 +11,14 @@
 
     @include('layouts._breadcrumb')
     <div class="card">
-        <ul class="collapsible">
-            <li>
-                <div class="collapsible-header"><i class="material-icons prefix green-text">photo_camera</i> Foto
-                </div>
-                <div class="collapsible-body">
-                    <img id="zoom_07" class="responsive-img"
-                         src="{{asset('img/small/image1.png')}}"
-                         data-zoom-image="{{asset('img/large/image1.jpg')}}"/>
-                    <script>
-                        $("#zoom_07").elevateZoom({
-                            zoomType: "lens",
-                            lensShape: "round",
-                            lensSize: 200
-                        });
-                    </script>
-                </div>
-            </li>
-        </ul>
+        <img style="padding: 10px;" id="image1" src="{{asset('img/large/image1.jpg')}}" width="100%"/>
+        <script type="text/javascript">
+            ;(function ($) {
+                $(window).on("load", function () {
+                    var $img = $("#image1").imgViewer2();
+                });
+            })(jQuery);
+        </script>
         <div class="divider"></div>
         <div class="section">
             <h5><i class="material-icons prefix green-text">local_florist</i> Dados

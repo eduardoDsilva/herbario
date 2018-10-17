@@ -20,6 +20,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "imgviewer2": "^1.1.0",
         "vue-materialize-datatable": "^0.7.6"
     }
 }
