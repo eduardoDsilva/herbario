@@ -93,4 +93,16 @@ class GeneroController extends Controller
         Genero::find($dataForm['id'])->delete();
         return redirect()->back();
     }
+
+    /**
+     * Recovers a previously deleted record
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function recovery($id)
+    {
+        Genero::withTrashed()->where('id', $id)->restore();
+        return redirect()->route('soft-delete.generos');
+    }
 }

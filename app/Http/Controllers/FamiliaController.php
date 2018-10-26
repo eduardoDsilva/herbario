@@ -91,6 +91,22 @@ class FamiliaController extends Controller
     {
         $dataForm = $request->all();
         Familia::find($dataForm['id'])->delete();
+        $exsicata = Exsicata::where('familia_id', '=', $dataForm['id'])->get();
+        foreach($exsicata as $data){
+            $data->delete();
+        }
         return redirect()->back();
+    }
+
+    /**
+     * Recovers a previously deleted record
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function recovery($id)
+    {
+        Familia::withTrashed()->where('id', $id)->restore();
+        return redirect()->route('soft-delete.familias');
     }
 }

@@ -43,7 +43,7 @@
 
         <nav class="green green darken-2">
             <div class="nav-wrapper container">
-                <a href="#" class="brand-logo">Jardim Botânico</a>
+                <a href="{{route('home')}}" class="brand-logo">Jardim Botânico</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="{{route('home')}}">Home</a></li>

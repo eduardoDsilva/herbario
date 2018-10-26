@@ -114,4 +114,17 @@ class ExsicataController extends Controller
         Endereco::where('exsicata_id', '=', $dataForm['id'])->delete();
         return redirect()->back();
     }
+
+    /**
+     * Recovers a previously deleted record
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function recovery($id)
+    {
+        Exsicata::withTrashed()->where('id', $id)->restore();
+        Endereco::withTrashed()->where('exsicata_id', $id)->restore();
+        return redirect()->route('soft-delete.exsicatas');
+    }
 }

@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('titulo', 'Editar epíteto')
+
+@section('content')@section('titulo', 'Editar epíteto')
 @section('breadcrumb')
     <a href="{{route('home')}}" class="breadcrumb">Home</a>
     <a href="{{route('herbario')}}" class="breadcrumb">Herbário Virtual</a>
     <a href="{{route('epitetos.index')}}" class="breadcrumb">Epitetos</a>
     <a href="{{route('epitetos.edit', $data->id)}}" class="breadcrumb">Editar epiteto</a>
 @endsection
-@section('content')
 
     @include('layouts._breadcrumb')
     @ability('admin,gerenciador,moderador', '')

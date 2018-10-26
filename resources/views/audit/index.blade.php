@@ -53,6 +53,4 @@
         </div>
     </div>
     @endability
-    </div>
-
 @endsection

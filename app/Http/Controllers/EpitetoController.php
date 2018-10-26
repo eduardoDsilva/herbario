@@ -91,6 +91,22 @@ class EpitetoController extends Controller
     {
         $dataForm = $request->all();
         Epiteto::find($dataForm['id'])->delete();
+        $exsicata = Exsicata::where('epiteto_id', '=', $dataForm['id'])->get();
+        foreach($exsicata as $data){
+            $data->delete();
+        }
         return redirect()->back();
+    }
+
+    /**
+     * Recovers a previously deleted record
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function recovery($id)
+    {
+        Epiteto::withTrashed()->where('id', $id)->restore();
+        return redirect()->route('soft-delete.epitetos');
     }
 }

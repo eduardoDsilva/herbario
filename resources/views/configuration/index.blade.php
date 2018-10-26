@@ -20,7 +20,7 @@
         <div class="card z-depth-5">
             <div class="row">
                 @ability('admin,moderador', '')
-                <div class="col s12 m6 l6 hoverable">
+                <div class="col s12 m6 l4 hoverable">
                     <a href="{{route('roles.index')}}">
                         <div class="card small green darken-4">
                             <div class="card-content white-text">
@@ -33,7 +33,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col s12 m6 l6 hoverable">
+                <div class="col s12 m6 l4 hoverable">
                     <a href="{{route('permissions.index')}}">
                         <div class="card small teal darken-4">
                             <div class="card-content white-text">
@@ -47,13 +47,14 @@
                         </div>
                     </a>
                 </div>
-                <div class="col s12 m6 l6 hoverable">
+                <div class="col s12 m6 l4 hoverable">
                     <a href="{{route('audits.index')}}">
                         <div class="card small blue-grey darken-4">
                             <div class="card-content white-text">
                                 <span class="card-title">Auditoria</span>
                                 <div class="divider"></div>
-                                <p>A tabela de auditoria possuí todos os registros de açoes dentro do sistema. Dentre elas estão: </p>
+                                <p>A tabela de auditoria possuí todos os registros de açoes dentro do sistema. Dentre
+                                    elas estão: </p>
                                 <li>Registro de criação de exsicata</li>
                                 <li>Registro de alteração de exsicata</li>
                                 <li>Registro de criação de usuário</li>
@@ -64,7 +65,7 @@
                 </div>
                 @endability
                 @ability('admin,gerenciador,moderador', '')
-                <div class="col s12 m6 l6 hoverable">
+                <div class="col s12 m6 l4 hoverable">
                     <a href="{{route('users.index')}}">
                         <div class="card small light-blue darken-4">
                             <div class="card-content white-text">
@@ -75,8 +76,19 @@
                         </div>
                     </a>
                 </div>
+                <div class="col s12 m6 l4 hoverable">
+                    <a href="{{route('soft-delete.index')}}">
+                        <div class="card small deep-purple darken-4">
+                            <div class="card-content white-text">
+                                <span class="card-title">Registros deletados</span>
+                                <div class="divider"></div>
+                                <p>Acesse este item para visualizar os registros deletados do sistema.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
                 @endability
-                <div class="col s12 m6 l6 hoverable">
+                <div class="col s12 m6 l4 hoverable">
                     <a href="{{route('users.edit', \Illuminate\Support\Facades\Auth::user()->id)}}">
                         <div class="card small indigo darken-4">
                             <div class="card-content white-text">

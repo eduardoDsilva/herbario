@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('home');
 });
@@ -32,6 +33,15 @@ Route::group(['middleware' => ['role:gerenciador|moderador|admin']], function() 
     Route::resource('permissions', 'PermissionController');
     Route::resource('configurations', 'ConfigurationController');
     Route::resource('users', 'UserController');
+    Route::get('/configuracao/registros-apagados', 'SoftDeleteController@index')->name('soft-delete.index');
+    Route::get('/configuracao/registros-apagados/exsicatas', 'SoftDeleteController@exsicatas')->name('soft-delete.exsicatas');
+    Route::get('/configuracao/registros-apagados/epitetos', 'SoftDeleteController@epitetos')->name('soft-delete.epitetos');
+    Route::get('/configuracao/registros-apagados/generos', 'SoftDeleteController@generos')->name('soft-delete.generos');
+    Route::get('/configuracao/registros-apagados/familias', 'SoftDeleteController@familias')->name('soft-delete.familias');
+    Route::get('/configuracao/registros-apagados/exsicatas/recovery/{id}', 'ExsicataController@recovery')->name('soft-delete.exsicatas.recovery');
+    Route::get('/configuracao/registros-apagados/familias/recovery/{id}', 'FamiliaController@recovery')->name('soft-delete.familias.recovery');
+    Route::get('/configuracao/registros-apagados/generos/recovery/{id}', 'GeneroController@recovery')->name('soft-delete.generos.recovery');
+    Route::get('/configuracao/registros-apagados/epitetos/recovery/{id}', 'EpitetoController@recovery')->name('soft-delete.epitetos.recovery');
 });
 
 Route::group(['middleware' => ['role:admin|moderador']], function() {
