@@ -40,6 +40,7 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $dataForm = $request->all();
+        dd($dataForm);
         $role = Role::create($dataForm);
         foreach($dataForm['permission'] as $data){
             $role->permission()->attach($data);
@@ -99,7 +100,6 @@ class RoleController extends Controller
     {
         $dataForm = $request->all();
         DB::delete('delete from roles where id = ?', $dataForm[id]);
-      //  Role::find($dataForm['id'])->delete();
         return redirect()->back();
     }
 }

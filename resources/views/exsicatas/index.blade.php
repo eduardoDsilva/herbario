@@ -108,7 +108,7 @@
     </div>
     @ability('admin,gerenciador,moderador,coletor', '')
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red" href="{{route('exsicatas.create')}}">
+        <a class="btn-floating btn-large" href="{{route('exsicatas.create')}}">
             <i class="large material-icons">add</i>
         </a>
     </div>

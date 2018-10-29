@@ -32,8 +32,8 @@
                            data-tooltip="Exsicatas" href="{{route('familias.show', $familia->id)}}">Exsicatas</a></td>
                     <td>
                         @ability('admin,gerenciador,moderador', '')
-                        <a class="modal-trigger tooltipped" data-position="top" data-delay="50"
-                           data-tooltip="Editar" href="{{route('familias.edit', $familia->id)}}"> <i
+                        <a data-target="modal3" id="edit-familia" class="modal-trigger tooltipped" data-position="top" data-delay="50"
+                           data-tooltip="Editar" href="#modal3" data-id="{{$familia->id}}"> <i
                                     class="small material-icons">edit</i></a>
                         <a data-target="modal1" class="modal-trigger tooltipped" data-position="top" data-delay="50"
                            data-tooltip="Deletar" href="#modal1" data-id="{{$familia->id}}"
@@ -53,11 +53,49 @@
     </div>
     @ability('admin,gerenciador,moderador', '')
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red" href="{{route('familias.create')}}">
+        <a data-target="modal2" class="btn-floating btn-large modal-trigger" href="#modal2">
             <i class="large material-icons">add</i>
         </a>
     </div>
     @endability
+
+    <div id="modal3" class="modal">
+        <form action="{{route('familias.update', 'update')}}" method="POST">
+            @csrf
+            <input type="hidden" name="_method" value="PUT">
+            <div class="modal-content">
+                <h4>Editar família</h4>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="id" name="id" type="number" hidden>
+                        <input id="name" name="name" type="text" class="validate">
+                        <label for="name">Nome</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn red delete" type="submit">Sim</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="modal2" class="modal">
+        <form action="{{route('familias.store')}}" method="POST">
+            @csrf
+            <div class="modal-content">
+                <h4>Criar família</h4>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="name" name="name" type="text" class="validate">
+                        <label for="name">Nome</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn red delete" type="submit">Sim</button>
+            </div>
+        </form>
+    </div>
 
     <div id="modal1" class="modal">
         <form action="{{route('familias.destroy', 'delete')}}" method="POST">

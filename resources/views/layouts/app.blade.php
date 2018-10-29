@@ -139,6 +139,19 @@
         $('#id_delete').val($(this).data('id'));
         $('#name_delete').val($(this).data('name'));
     });
+
+    $(document).on('click', '#edit-familia', function () {
+        var id = $(this).data('id');
+        $.ajax({
+            type: 'GET',
+            url: 'familias/' + id + '/edit',
+            success: function (data) {
+                console.log(data.name);
+                $('#id').val(data.id);
+                $('#name').val(data.name);
+            }
+        });
+    })
 </script>
 </body>
 </html>

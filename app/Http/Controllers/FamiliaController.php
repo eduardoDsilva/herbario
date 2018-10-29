@@ -26,7 +26,7 @@ class FamiliaController extends Controller
      */
     public function create()
     {
-        return view('familia.create');
+        //
     }
 
     /**
@@ -64,7 +64,8 @@ class FamiliaController extends Controller
     public function edit($id)
     {
         $data = Familia::find($id);
-        return view('familia.edit', compact('data'));
+        return response()->json($data);
+        //return view('familia.edit', compact('data'));
     }
 
     /**
@@ -74,10 +75,10 @@ class FamiliaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $dataForm = $request->all();
-        Familia::find($id)->update($dataForm);
+        Familia::find($dataForm['id'])->update($dataForm);
         return redirect()->route('familias.index');
     }
 

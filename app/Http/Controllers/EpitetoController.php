@@ -26,7 +26,7 @@ class EpitetoController extends Controller
      */
     public function create()
     {
-        return view('epiteto.create');
+        //
     }
 
     /**

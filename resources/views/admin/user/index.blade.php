@@ -64,14 +64,8 @@
                                                     <option value="{{$role->id}}">{{$role->display_name}}</option>
                                                 @endforeach
                                             </select>
-                                            <label>Materialize Select</label>
+                                            <label>Selecione o papel</label>
                                         </div>
-                                        </br>
-                                        </br>
-                                        </br>
-                                        </br>
-                                        </br>
-                                        </br>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="modal-close waves-effect waves-green btn-flat">

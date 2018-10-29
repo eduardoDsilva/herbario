@@ -26,7 +26,7 @@ class GeneroController extends Controller
      */
     public function create()
     {
-        return view('genero.create');
+        //
     }
 
     /**

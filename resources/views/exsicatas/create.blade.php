@@ -150,12 +150,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="section">
-                    <div class="row">
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Enviar
-                            <i class="material-icons right">send</i>
-                        </button>
-                    </div>
+                <div class="fixed-action-btn">
+                    <button type="submit" class="btn-floating btn-large">
+                        <i class="large material-icons">add</i>
+                    </button>
                 </div>
             </form>
         </div>

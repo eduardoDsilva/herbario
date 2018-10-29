@@ -52,11 +52,29 @@
     </div>
     @ability('admin,gerenciador,moderador', '')
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red" href="{{route('generos.create')}}">
+        <a data-target="modal2" class="btn-floating btn-large modal-trigger" href="#modal2">
             <i class="large material-icons">add</i>
         </a>
     </div>
     @endability
+
+    <div id="modal2" class="modal">
+        <form action="{{route('generos.store')}}" method="POST">
+            @csrf
+            <div class="modal-content">
+                <h4>Criar gênero</h4>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="name" name="name" type="text" class="validate">
+                        <label for="name">Nome</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn red delete" type="submit">Sim</button>
+            </div>
+        </form>
+    </div>
 
     <div id="modal1" class="modal">
         <form action="{{route('generos.destroy', 'delete')}}" method="POST">
@@ -65,13 +83,7 @@
             <div class="modal-content">
                 <h4>Deletar</h4>
                 <p>Você tem certeza que deseja deletar o gênero abaixo?</p>
-                <div class="row">
-                    <label for="id_delete">ID:</label>
-                    <div class="input-field col s12">
-                        <input class="validate" hidden name="id" type="number" id="id_delete">
-                        <input disabled class="validate" name="id" type="number" id="id_delete">
-                    </div>
-                </div>
+                <input class="validate" hidden name="id" type="number" id="id_delete">
                 <div class="row">
                     <label for="name_delete">Nome:</label>
                     <div class="input-field col s12">
