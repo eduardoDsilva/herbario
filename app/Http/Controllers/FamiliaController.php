@@ -20,16 +20,6 @@ class FamiliaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -37,9 +27,8 @@ class FamiliaController extends Controller
      */
     public function store(Request $request)
     {
-        $dataForm = $request->all();
-        Familia::create($dataForm);
-        return redirect()->route('familias.index');
+        $data = Familia::create($request->all());
+        return response()->json($data);
     }
 
     /**
@@ -65,7 +54,6 @@ class FamiliaController extends Controller
     {
         $data = Familia::find($id);
         return response()->json($data);
-        //return view('familia.edit', compact('data'));
     }
 
     /**
@@ -77,9 +65,9 @@ class FamiliaController extends Controller
      */
     public function update(Request $request)
     {
-        $dataForm = $request->all();
-        Familia::find($dataForm['id'])->update($dataForm);
-        return redirect()->route('familias.index');
+        Familia::find($request->all()['id'])->update($request->all());
+        $data = Familia::find($request->all()['id']);
+        return response()->json($data);
     }
 
     /**
@@ -90,13 +78,12 @@ class FamiliaController extends Controller
      */
     public function destroy(Request $request)
     {
-        $dataForm = $request->all();
-        Familia::find($dataForm['id'])->delete();
-        $exsicata = Exsicata::where('familia_id', '=', $dataForm['id'])->get();
-        foreach($exsicata as $data){
+        Familia::find($request->all()['id'])->delete();
+        $familia = Exsicata::where('familia_id', '=', $request->all()['id'])->get();
+        foreach($familia as $data){
             $data->delete();
         }
-        return redirect()->back();
+        return response()->json('ok');
     }
 
     /**

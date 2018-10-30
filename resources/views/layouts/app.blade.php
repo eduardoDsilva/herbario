@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="_token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -96,7 +96,6 @@
                         </li>
                     @endauth
                 </ul>
-
             </div>
         </nav>
     </div>
@@ -134,24 +133,64 @@
 </footer>
 <script>
     M.AutoInit();
-
-    $(document).on('click', '.modal-trigger', function () {
-        $('#id_delete').val($(this).data('id'));
-        $('#name_delete').val($(this).data('name'));
-    });
-
-    $(document).on('click', '#edit-familia', function () {
-        var id = $(this).data('id');
-        $.ajax({
-            type: 'GET',
-            url: 'familias/' + id + '/edit',
-            success: function (data) {
-                console.log(data.name);
-                $('#id').val(data.id);
-                $('#name').val(data.name);
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': $('meta[name="_token"]').attr('content')
             }
         });
-    })
+    });
+
+    $(document).on('click', '.modal-trigger', function () {
+        $('#id-edit').val($(this).data('id'));
+        $('#id-delete').val($(this).data('id'));
+        $('#name-edit').val($(this).data('name'));
+        $('#name-delete').val($(this).data('name'));
+    });
+
+    $("#crud-store").click(function (e) {
+        e.preventDefault();
+        var form_action = $("#create-item").find("form").attr("action");
+        var name = $("#create-item").find("input[name='name']").val();
+        $.ajax({
+            dataType: 'json',
+            type: 'POST',
+            url: form_action,
+            data: {name: name}
+        }).done(function (data) {
+            M.toast({html: data.name+' criado com sucesso!'});
+        });
+    });
+
+    $("#crud-update").click(function (e) {
+        e.preventDefault();
+        var form_action = $("#edit-item").find("form").attr("action");
+        var id = $("#edit-item").find("input[name='id']").val();
+        var name = $("#edit-item").find("input[name='name']").val();
+        $.ajax({
+            dataType: 'json',
+            type: 'PUT',
+            url: form_action,
+            data: {id: id, name: name}
+        }).done(function (data) {
+            M.toast({html: data.name+' atualizado com sucesso!'});
+        });
+    });
+
+    $("#crud-delete").click(function (e) {
+        e.preventDefault();
+        var form_action = $("#delete-item").find("form").attr("action");
+        var id = $("#delete-item").find("input[name='id']").val();
+        var name = $("#delete-item").find("input[name='name']").val();
+       $.ajax({
+            dataType: 'json',
+            type: 'DELETE',
+            url: form_action,
+            data: {id: id}
+        }).done(function () {
+            M.toast({html: name+' deletado com sucesso!'});
+        });
+    });
 </script>
 </body>
 </html>

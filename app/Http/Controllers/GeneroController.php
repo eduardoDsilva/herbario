@@ -20,32 +20,21 @@ class GeneroController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $dataForm = $request->all();
-        Genero::create($dataForm);
-        return redirect()->route('generos.index');
+        $data = Genero::create($request->all());
+        return response()->json($data);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -58,46 +47,49 @@ class GeneroController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $data = Genero::find($id);
-        return view('genero.edit', compact('data'));
+        return response()->json($data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $dataForm = $request->all();
-        Genero::find($id)->update($dataForm);
-        return redirect()->route('generos.index');
+        Genero::find($request->all()['id'])->update($request->all());
+        $data = Genero::find($request->all()['id']);
+        return response()->json($data);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {
-        $dataForm = $request->all();
-        Genero::find($dataForm['id'])->delete();
-        return redirect()->back();
+        Genero::find($request->all()['id'])->delete();
+        $genero = Exsicata::where('genero_id', '=', $request->all()['id'])->get();
+        foreach ($genero as $data) {
+            $data->delete();
+        }
+        return response()->json('ok');
     }
 
     /**
      * Recovers a previously deleted record
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function recovery($id)

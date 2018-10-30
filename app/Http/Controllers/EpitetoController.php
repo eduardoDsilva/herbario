@@ -20,16 +20,6 @@ class EpitetoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -37,9 +27,8 @@ class EpitetoController extends Controller
      */
     public function store(Request $request)
     {
-        $dataForm = $request->all();
-        Epiteto::create($dataForm);
-        return redirect()->route('epitetos.index');
+        $data = Epiteto::create($request->all());
+        return response()->json($data);
     }
 
     /**
@@ -64,7 +53,7 @@ class EpitetoController extends Controller
     public function edit($id)
     {
         $data = Epiteto::find($id);
-        return view('epiteto.edit', compact('data'));
+        return response()->json($data);
     }
 
     /**
@@ -76,9 +65,9 @@ class EpitetoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dataForm = $request->all();
-        Epiteto::find($id)->update($dataForm);
-        return redirect()->route('epitetos.index');
+        Epiteto::find($request->all()['id'])->update($request->all());
+        $data = Epiteto::find($request->all()['id']);
+        return response()->json($data);
     }
 
     /**
@@ -89,13 +78,12 @@ class EpitetoController extends Controller
      */
     public function destroy(Request $request)
     {
-        $dataForm = $request->all();
-        Epiteto::find($dataForm['id'])->delete();
-        $exsicata = Exsicata::where('epiteto_id', '=', $dataForm['id'])->get();
+        Epiteto::find($request->all()['id'])->delete();
+        $exsicata = Exsicata::where('epiteto_id', '=', $request->all()['id'])->get();
         foreach($exsicata as $data){
             $data->delete();
         }
-        return redirect()->back();
+        return response()->json('ok');
     }
 
     /**
