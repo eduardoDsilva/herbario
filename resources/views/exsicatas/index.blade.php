@@ -16,7 +16,7 @@
         <div class="col s12 m1 l1">
             <!-- Dropdown Trigger -->
             <a style="margin-top: 25px" class='dropdown-trigger btn' href='#' data-target='dropdown2'><i
-                        class="large material-icons">dashboard</i></a>
+                    class="large material-icons">dashboard</i></a>
 
             <!-- Dropdown Structure -->
             <ul id='dropdown2' class='dropdown-content'>
@@ -53,17 +53,20 @@
                                              width="150" width="300"
                                              src="https://materializecss.com/images/sample-1.jpg">
                         </td>
-                        @ability('admin,gerenciador,moderador', '')
                         <td>
+                            @ability('admin,gerenciador,moderador', '')
                             <a class="modal-trigger tooltipped" data-position="top" data-delay="50"
                                data-tooltip="Editar" href="{{route('exsicatas.edit', $exsicata->id)}}"> <i
-                                        class="small material-icons">edit</i></a>
+                                    class="small material-icons">edit</i></a>
                             <a data-target="modal1" class="modal-trigger tooltipped" data-position="top" data-delay="50"
                                data-tooltip="Deletar" href="#modal1" data-id="{{$exsicata->id}}"
                                data-name="{{$exsicata->genero->name}} {{$exsicata->epiteto->name}}"><i
-                                        class="small material-icons">delete</i></a>
+                                    class="small material-icons">delete</i></a>
+                            @endability
+                            <a class="tooltipped" data-position="top" data-delay="50"
+                               data-tooltip="Relatório" href="{{route('relatorios-exsicata', $exsicata->id)}}"><i
+                                    class="small material-icons">chrome_reader_mode</i></a>
                         </td>
-                        @endability
                         @empty
                             <td>Nenhuma exsicata cadastrada</td>
                     </tr>
@@ -86,15 +89,20 @@
                                 </p>
                             </div>
                             <div class="card-action">
-                                <a class="btn" href="{{route('exsicatas.show', $exsicata->id)}}">Acessar</a>
+                                <a class="btn tooltipped" data-position="top" data-delay="50"
+                                   data-tooltip="Acessar" href="{{route('exsicatas.show', $exsicata->id)}}">Acessar</a>
+                                <a class="btn tooltipped" data-position="top" data-delay="50"
+                                   data-tooltip="Relatório" href="{{route('relatorios-exsicata', $exsicata->id)}}"><i
+                                        class="small material-icons">chrome_reader_mode</i></a>
                                 @ability('admin,gerenciador,moderador', '')
-                                <a class="btn" href="{{route('exsicatas.edit', $exsicata->id)}}"><i
-                                            class="small material-icons">edit</i></a>
+                                <a class="btn tooltipped" data-position="top" data-delay="50"
+                                   data-tooltip="Editar" href="{{route('exsicatas.edit', $exsicata->id)}}"><i
+                                        class="small material-icons">edit</i></a>
                                 <a class="btn modal-trigger tooltipped" data-target="modal1" data-position="top"
                                    data-delay="50"
                                    data-tooltip="Deletar" href="#modal1" data-id="{{$exsicata->id}}"
                                    data-name="{{$exsicata->genero->name}} {{$exsicata->epiteto->name}}"><i
-                                            class="small material-icons">delete</i></a>
+                                        class="small material-icons">delete</i></a>
                                 @endability
                             </div>
                         </div>

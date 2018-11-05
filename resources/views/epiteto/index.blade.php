@@ -12,7 +12,7 @@
     @include('layouts._quantidade-de-registros')
     <div class="divider"></div>
     <div class="card">
-        <table class="centered responsive-table highlight bordered">
+        <table class="centered responsive-table highlight bordered" id="table">
             <thead>
             <tr>
                 <th>Nome</th>
@@ -32,11 +32,14 @@
                            data-tooltip="Exsicatas" href="{{route('epitetos.show', $epiteto->id)}}">Exsicatas</a></td>
                     <td>
                         @ability('admin,gerenciador,moderador', '')
-                        <a data-target="edit-item" class="modal-trigger tooltipped" id="epitetos-edit" data-position="top"
+                        <a data-target="edit-item" class="modal-trigger tooltipped" id="epitetos-edit"
+                           data-position="top"
                            data-delay="50"
-                           data-tooltip="Editar" href="#edit-item" data-id="{{$epiteto->id}}" data-name="{{$epiteto->name}}"> <i
+                           data-tooltip="Editar" href="#edit-item" data-id="{{$epiteto->id}}"
+                           data-name="{{$epiteto->name}}"> <i
                                 class="small material-icons">edit</i></a>
-                        <a data-target="delete-item" class="modal-trigger tooltipped" data-position="top" data-delay="50"
+                        <a data-target="delete-item" class="modal-trigger tooltipped" data-position="top"
+                           data-delay="50"
                            data-tooltip="Deletar" href="#delete-item" data-id="{{$epiteto->id}}"
                            data-name="{{$epiteto->name}}"><i
                                 class="small material-icons">delete</i></a>
@@ -70,4 +73,10 @@
     @component('layouts.modal-delete', ['route'=>'epitetos.destroy', 'titulo'=>'epíteto'])
     @endcomponent
 
+@endsection
+
+@section('script')
+    <script>
+
+    </script>
 @endsection

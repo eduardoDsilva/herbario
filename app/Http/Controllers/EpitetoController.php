@@ -19,6 +19,11 @@ class EpitetoController extends Controller
         return view('epiteto.index', compact('data'));
     }
 
+    public function epiteto(){
+        $data = Epiteto::with(['exsicata'])->orderBy('name', 'asc')->get();
+        return response()->json($data);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

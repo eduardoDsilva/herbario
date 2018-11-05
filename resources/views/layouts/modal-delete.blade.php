@@ -9,7 +9,7 @@
                 <label for="name-delete">Nome:</label>
                 <div class="input-field col s12">
                     <input id="id-delete" name="id" type="number" hidden>
-                    <input id="name-delete" name="name" type="text" class="validate">
+                    <input disabled id="name-delete" name="name" type="text" class="validate">
                 </div>
             </div>
         </div>

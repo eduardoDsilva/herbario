@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn red delete" type="submit" id="crud-update">Sim</button>
+            <button class="btn yellow darken-4" type="submit" id="crud-update">Sim</button>
         </div>
     </form>
 </div>

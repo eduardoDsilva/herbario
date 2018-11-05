@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn red delete" type="submit" id="crud-store">Sim</button>
+            <button class="btn green" type="submit" id="crud-store">Sim</button>
         </div>
     </form>
 </div>

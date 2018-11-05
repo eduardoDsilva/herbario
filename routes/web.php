@@ -27,6 +27,7 @@ Route::resource('generos', 'GeneroController');
 Route::resource('exsicatas', 'ExsicataController');
 
 Route::get('/index-grade', 'ExsicataController@indexGrade')->name('exsicatas.index-grade');
+Route::get('/epiteto-tabela', 'EpitetoController@epiteto')->name('epiteto-tabela');
 
 Route::group(['middleware' => ['role:gerenciador|moderador|admin']], function() {
     Route::resource('roles', 'RoleController');
@@ -51,5 +52,7 @@ Route::group(['middleware' => ['role:admin|moderador']], function() {
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/relatorios/exsicatas/{id}', 'ExsicataPdfController@exsicataPdf')->name('relatorios-exsicata');
 
 Route::get('/herbario-virtual', 'HomeController@herbario')->name('herbario');

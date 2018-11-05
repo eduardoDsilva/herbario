@@ -27,7 +27,6 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
-
 </head>
 <body>
 <header>
@@ -133,12 +132,39 @@
 </footer>
 <script>
     M.AutoInit();
+</script>
+@yield('script')
+<script>
+    $("#crud-table").click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            dataType: 'json',
+            type: 'POST',
+            url: form_action,
+        }).done(function (data) {
+            M.toast({html: data.name+' criado com sucesso!'});
+        });
+    });
+
     $(function() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-Token': $('meta[name="_token"]').attr('content')
             }
         });
+    });
+
+    $(function() {
+        $.ajax({
+            dataType: 'json',
+            type: 'GET',
+            url: '/epiteto-tabela',
+        }).done(function (data) {
+            $(data[53].exsicata).each(function(index) {
+                console.log('Epiteto: '+data[53].name);
+                console.log('Exsicata: '+data[53].exsicata[index].name);
+            });
+       });
     });
 
     $(document).on('click', '.modal-trigger', function () {
@@ -181,14 +207,13 @@
         e.preventDefault();
         var form_action = $("#delete-item").find("form").attr("action");
         var id = $("#delete-item").find("input[name='id']").val();
-        var name = $("#delete-item").find("input[name='name']").val();
        $.ajax({
             dataType: 'json',
             type: 'DELETE',
             url: form_action,
             data: {id: id}
         }).done(function () {
-            M.toast({html: name+' deletado com sucesso!'});
+            M.toast({html:  'Deletado com sucesso!'});
         });
     });
 </script>
