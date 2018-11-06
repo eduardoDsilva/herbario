@@ -15,7 +15,7 @@
 
     <script src="{{ asset('js/herbario.js') }}"></script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"/>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" media="screen">
 
     <script type="text/javascript" src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
@@ -49,7 +49,7 @@
                     <li><a href="">Sobre</a></li>
                     <li><a href="">Contato</a></li>
                     <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Herbário Virtual<i
-                                    class="material-icons right">arrow_drop_down</i></a></li>
+                                class="material-icons right">arrow_drop_down</i></a></li>
                     @auth
                         <li><a href="{{route('configurations.index')}}">Configurações</a></li>
                         <li><a href="{{ route('logout') }}"
@@ -142,11 +142,11 @@
             type: 'POST',
             url: form_action,
         }).done(function (data) {
-            M.toast({html: data.name+' criado com sucesso!'});
+            M.toast({html: data.name + ' criado com sucesso!'});
         });
     });
 
-    $(function() {
+    $(function () {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-Token': $('meta[name="_token"]').attr('content')
@@ -154,17 +154,17 @@
         });
     });
 
-    $(function() {
+    $(function () {
         $.ajax({
             dataType: 'json',
             type: 'GET',
             url: '/epiteto-tabela',
         }).done(function (data) {
-            $(data[53].exsicata).each(function(index) {
-                console.log('Epiteto: '+data[53].name);
-                console.log('Exsicata: '+data[53].exsicata[index].name);
+            $(data[53].exsicata).each(function (index) {
+                console.log('Epiteto: ' + data[53].name);
+                console.log('Exsicata: ' + data[53].exsicata[index].name);
             });
-       });
+        });
     });
 
     $(document).on('click', '.modal-trigger', function () {
@@ -184,7 +184,16 @@
             url: form_action,
             data: {name: name}
         }).done(function (data) {
-            M.toast({html: data.name+' criado com sucesso!'});
+
+            var newRow = $("<tr id="+data.id+">");
+            var cols = "";
+            cols += '<td>'+data.name+'</td>';
+            cols += '<td>'+0+'</td>';
+            cols += '<td><a class="btn tooltipped" data-position="top" data-delay="50" data-tooltip="Exsicatas" href="/epitetos/'+data.id+'">Exsicatas</a></td>';
+            cols += '<td><a data-target="edit-item" class="modal-trigger tooltipped" id="epitetos-edit" data-position="top" data-delay="50" data-tooltip="Editar" href="#edit-item" data-id="'+data.id+'" data-name="'+data.name+'"> <i class="small material-icons">edit</i></a> <a data-target="delete-item" class="modal-trigger tooltipped" id="epitetos-delete" data-position="top" data-delay="50" data-tooltip="Deletar" href="#delete-item" data-id="'+data.id+'" data-name="'+data.name+'"> <i class="small material-icons">delete</i></a> </td>';
+            newRow.append(cols);
+            $("#table").append(newRow);
+            M.toast({html: data.name + ' criado com sucesso!'});
         });
     });
 
@@ -199,7 +208,9 @@
             url: form_action,
             data: {id: id, name: name}
         }).done(function (data) {
-            M.toast({html: data.name+' atualizado com sucesso!'});
+            $("#" + id +'-name').empty();
+            $("#" + id +'-name').append(data.name);
+            M.toast({html: 'Atualizado com sucesso!'});
         });
     });
 
@@ -207,13 +218,14 @@
         e.preventDefault();
         var form_action = $("#delete-item").find("form").attr("action");
         var id = $("#delete-item").find("input[name='id']").val();
-       $.ajax({
+        $.ajax({
             dataType: 'json',
             type: 'DELETE',
             url: form_action,
             data: {id: id}
         }).done(function () {
-            M.toast({html:  'Deletado com sucesso!'});
+            $("#" + id).remove();
+            M.toast({html: 'Deletado com sucesso!'});
         });
     });
 </script>

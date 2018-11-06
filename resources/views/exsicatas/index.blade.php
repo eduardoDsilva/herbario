@@ -26,7 +26,35 @@
         </div>
     </div>
     <div class="divider"></div>
-    <div class="card">
+    <div class="card-panel">
+        <div class="row">
+            <form>
+                <div class="input-field col s12 m12 l4">
+                    <select required name="tipo">
+                        <option value="" disabled selected>Filtrar por...</option>
+                        <option value="nascimento">BDD</option>
+                        <option value="nome">Coletor</option>
+                        <option value="nascimento">Determinador</option>
+                        <option value="nascimento">Escaninho</option>
+                        <option value="id">Espécime</option>
+                        <option value="nascimento">Localização</option>
+                        <option value="nascimento">Número</option>
+                        <option value="nascimento">Quantidade</option>
+                    </select>
+                    <label>Filtros</label>
+                </div>
+                <div class="input-field col s10 m11 l7">
+                    <input id="search" class="tooltipped" data-position="top" data-delay="50"
+                           data-tooltip="Insira um complemento para a pesquisa" type="text" name="search" required>
+                    <label for="search">Pesquise no sistema...</label>
+                </div>
+                {{csrf_field()}}
+                <div class="input-field col s1 m1 l1">
+                    <button type="submit" class="btn-floating tooltipped" data-position="top" data-delay="50"
+                            data-tooltip="Clique aqui para pesquisar"><i class="material-icons">search</i></button>
+                </div>
+            </form>
+        </div>
         @if($table)
             <table class="centered responsive-table highlight bordered">
                 <thead>
@@ -35,9 +63,7 @@
                     <th>Coletor</th>
                     <th>Localização</th>
                     <th>Imagem</th>
-                    @ability('admin,gerenciador,moderador', '')
                     <th>Ações</th>
-                    @endability
                 </tr>
                 </thead>
                 <tbody>
@@ -64,7 +90,8 @@
                                     class="small material-icons">delete</i></a>
                             @endability
                             <a class="tooltipped" data-position="top" data-delay="50"
-                               data-tooltip="Relatório" href="{{route('relatorios-exsicata', $exsicata->id)}}"><i
+                               data-tooltip="Relatório" target="_blank"
+                               href="{{route('relatorios-exsicata', $exsicata->id)}}"><i
                                     class="small material-icons">chrome_reader_mode</i></a>
                         </td>
                         @empty
@@ -92,7 +119,8 @@
                                 <a class="btn tooltipped" data-position="top" data-delay="50"
                                    data-tooltip="Acessar" href="{{route('exsicatas.show', $exsicata->id)}}">Acessar</a>
                                 <a class="btn tooltipped" data-position="top" data-delay="50"
-                                   data-tooltip="Relatório" href="{{route('relatorios-exsicata', $exsicata->id)}}"><i
+                                   data-tooltip="Relatório" target="_blank"
+                                   href="{{route('relatorios-exsicata', $exsicata->id)}}"><i
                                         class="small material-icons">chrome_reader_mode</i></a>
                                 @ability('admin,gerenciador,moderador', '')
                                 <a class="btn tooltipped" data-position="top" data-delay="50"

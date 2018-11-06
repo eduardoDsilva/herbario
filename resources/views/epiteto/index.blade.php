@@ -11,22 +11,42 @@
     @include('layouts._breadcrumb')
     @include('layouts._quantidade-de-registros')
     <div class="divider"></div>
-    <div class="card">
+    <div class="card-panel">
+        <div class="row">
+            <form>
+                <div class="input-field col s12 m12 l4">
+                    <select required name="tipo">
+                        <option value="" disabled selected>Filtrar por...</option>
+                        <option value="nascimento">Nome</option>
+                        <option value="nome">Quantidade</option>
+                    </select>
+                    <label>Filtros</label>
+                </div>
+                <div class="input-field col s10 m11 l7">
+                    <input id="search" class="tooltipped" data-position="top" data-delay="50"
+                           data-tooltip="Insira um complemento para a pesquisa" type="text" name="search" required>
+                    <label for="search">Pesquise no sistema...</label>
+                </div>
+                {{csrf_field()}}
+                <div class="input-field col s1 m1 l1">
+                    <button type="submit" class="btn-floating tooltipped" data-position="top" data-delay="50"
+                            data-tooltip="Clique aqui para pesquisar"><i class="material-icons">search</i></button>
+                </div>
+            </form>
+        </div>
         <table class="centered responsive-table highlight bordered" id="table">
             <thead>
             <tr>
                 <th>Nome</th>
                 <th>Quantidade de Exsicatas</th>
                 <th>Exsicatas</th>
-                @ability('admin,gerenciador,moderador', '')
                 <th>Ações</th>
-                @endability
             </tr>
             </thead>
             <tbody>
             @forelse($data as $epiteto)
-                <tr>
-                    <td>{{$epiteto->name}}</td>
+                <tr id="{{$epiteto->id}}">
+                    <td id="{{$epiteto->id}}-name">{{$epiteto->name}}</td>
                     <td>{{count($epiteto->exsicata)}}</td>
                     <td><a class="btn tooltipped" data-position="top" data-delay="50"
                            data-tooltip="Exsicatas" href="{{route('epitetos.show', $epiteto->id)}}">Exsicatas</a></td>
@@ -44,6 +64,10 @@
                            data-name="{{$epiteto->name}}"><i
                                 class="small material-icons">delete</i></a>
                         @endability
+                        <a class="tooltipped" data-position="top" data-delay="50"
+                           data-tooltip="Relatório" target="_blank"
+                           href="{{route('relatorios-epiteto', $epiteto->id)}}"><i
+                                class="small material-icons">chrome_reader_mode</i></a>
                     </td>
                     @empty
                         <td>Nenhum epiteto cadastrado</td>
@@ -73,10 +97,4 @@
     @component('layouts.modal-delete', ['route'=>'epitetos.destroy', 'titulo'=>'epíteto'])
     @endcomponent
 
-@endsection
-
-@section('script')
-    <script>
-
-    </script>
 @endsection

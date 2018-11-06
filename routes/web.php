@@ -54,5 +54,8 @@ Route::group(['middleware' => ['role:admin|moderador']], function() {
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/relatorios/exsicatas/{id}', 'ExsicataPdfController@exsicataPdf')->name('relatorios-exsicata');
+Route::get('/relatorios/epitetos/{id}', 'EpitetoPdfController@exsicataPdf')->name('relatorios-epiteto');
+Route::get('/relatorios/generos/{id}', 'GeneroPdfController@exsicataPdf')->name('relatorios-genero');
+Route::get('/relatorios/familias/{id}', 'FamiliaPdfController@exsicataPdf')->name('relatorios-familia');
 
 Route::get('/herbario-virtual', 'HomeController@herbario')->name('herbario');
