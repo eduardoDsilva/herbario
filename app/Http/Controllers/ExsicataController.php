@@ -7,6 +7,7 @@ use App\Epiteto;
 use App\Exsicata;
 use App\Familia;
 use App\Genero;
+use App\Repositories\ImageRepository;
 use Illuminate\Http\Request;
 
 class ExsicataController extends Controller
@@ -18,7 +19,7 @@ class ExsicataController extends Controller
      */
     public function index()
     {
-        $data = Exsicata::paginate(9);
+        $data = Exsicata::with('endereco')->paginate(9);
         $table = true;
         return view('exsicatas.index', compact('data', 'table'));
     }
@@ -54,11 +55,15 @@ class ExsicataController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, ImageRepository $repo)
     {
-        $dataForm = $request->all();
+        $dataForm = $request->except('img');
         $endereco = Endereco::create($dataForm);
         $exsicata = Exsicata::create($dataForm + ['endereco_id' => $endereco->id]);
+        if ($request->hasFile('img')) {
+            $exsicata->image = $repo->saveImage($request->img, $exsicata->id, 'exsicatas', 250);
+            $exsicata->save();
+        }
         return redirect()->route('exsicatas.index');
     }
 
@@ -96,9 +101,18 @@ class ExsicataController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, ImageRepository $repo)
     {
-        //
+        $exsicata = Exsicata::with('endereco')->where('id', '=', $id)->first();
+        $exsicata->fill($request->all())->save();
+        $exsicata->endereco->fill($request->all())->save();
+        if ($request->hasFile('img')) {
+            $exsicata->image = $repo->saveImage($request->img, $exsicata->id, 'exsicatas', 1800);
+        }else{
+            $exsicata->image = "";
+        }
+        $exsicata->save();
+        return redirect()->route('exsicatas.index');
     }
 
     /**

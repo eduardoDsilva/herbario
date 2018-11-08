@@ -10,7 +10,7 @@
 
     @include('layouts._breadcrumb')
     <div class="card">
-        <img style="padding: 10px;" id="image1" src="{{asset('img/large/image1.jpg')}}" width="100%"/>
+        <img style="padding: 10px;" id="image1" src="{{$data->image}}" width="100%"/>
         <script type="text/javascript">
             ;(function ($) {
                 $(window).on("load", function () {
@@ -77,4 +77,12 @@
                 Observação: {{$data->endereco->observacao}}</p>
         </div>
     </div>
+    @ability('admin,gerenciador,moderador', '')
+    <div class="fixed-action-btn">
+        <a href="{{route('exsicatas.edit', $data->id)}}" class="btn-floating btn-large">
+            <i class="large material-icons">edit</i>
+        </a>
+    </div>
+    @endability
+
 @endsection

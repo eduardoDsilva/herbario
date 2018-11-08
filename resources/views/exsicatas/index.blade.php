@@ -81,7 +81,7 @@
                         <td width="17%"><img class="materialboxed"
                                              data-caption="Foto da exsicata {{$exsicata->genero->name}} {{$exsicata->epiteto->name}}"
                                              width="150" width="300"
-                                             src="https://materializecss.com/images/sample-1.jpg">
+                                             src="{{$exsicata->image}}">
                         </td>
                         <td>
                             @ability('admin,gerenciador,moderador', '')
@@ -110,7 +110,7 @@
                     <div class="col s12 m6 l4">
                         <div class="card large hoverable">
                             <div class="card-image">
-                                <img src="https://materializecss.com/images/sample-1.jpg">
+                                <img width="150" width="300" src="{{$exsicata->image}}">
                             </div>
                             <div class="card-content">
                                 <span class="card-title">{{$exsicata->genero->name}} {{$exsicata->epiteto->name}}</span>

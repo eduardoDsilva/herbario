@@ -12,7 +12,7 @@
     @ability('admin,gerenciador,moderador,coletor', '')
     <div class="card">
         <div class="row">
-            <form class="col s12" method="POST" action="{{route('exsicatas.index')}}">
+            <form class="col s12" method="POST" action="{{route('exsicatas.index')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="section">
                     <div class="row">
@@ -67,10 +67,10 @@
                             <div class="file-field input-field">
                                 <div class="btn">
                                     <span>IMAGEM</span>
-                                    <input name="imagem" id="imagem" type="file">
+                                    <input name="img" id="img" type="file">
                                 </div>
                                 <div class="file-path-wrapper">
-                                    <input name="imagem" id="imagem" class="file-path validate" type="text">
+                                    <input name="img" id="img" class="file-path validate" type="text">
                                 </div>
                             </div>
                         </div>

@@ -152,6 +152,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Skydiver\LaravelMaterializeCSS\MaterializeCSSServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -217,6 +218,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'MaterializeCSS' => Skydiver\LaravelMaterializeCSS\MaterializeCSS::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 ];

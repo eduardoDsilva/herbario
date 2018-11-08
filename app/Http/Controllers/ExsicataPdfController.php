@@ -12,7 +12,7 @@ class ExsicataPdfController extends Controller
         try {
             $exsicata = Exsicata::find($id);
             return \PDF::setOptions(['dpi' => 325, 'defaultFont' => 'sans-serif'])
-                ->loadView('admin.pdf.exsicata-individual', compact('exsicata'))
+                ->loadView('pdf.exsicata-individual', compact('exsicata'))
                 ->stream($exsicata->genero->name." ".$exsicata->epiteto->name.'-' . date('Y') . '.pdf');
         } catch (\Exception $e) {
             return abort(100,  '119.3');
