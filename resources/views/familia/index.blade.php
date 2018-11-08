@@ -13,12 +13,11 @@
     <div class="divider"></div>
     <div class="card-panel">
         <div class="row">
-            <form>
+            <form method="POST" action="{{ route('familias.filtrar') }}">
                 <div class="input-field col s12 m12 l4">
                     <select required name="tipo">
                         <option value="" disabled selected>Filtrar por...</option>
-                        <option value="nascimento">Nome</option>
-                        <option value="nome">Quantidade</option>
+                        <option value="nome">Nome</option>
                     </select>
                     <label>Filtros</label>
                 </div>
@@ -34,7 +33,7 @@
                 </div>
             </form>
         </div>
-        <table class="centered responsive-table highlight bordered">
+        <table class="centered responsive-table highlight bordered" id="table">
             <thead>
             <tr>
                 <th>Nome</th>
@@ -45,7 +44,7 @@
             </thead>
             <tbody>
             @forelse($data as $familia)
-                <tr>
+                <tr id="{{$familia->id}}">
                     <td>{{$familia->name}}</td>
                     <td>{{count($familia->exsicata)}}</td>
                     <td><a class="btn tooltipped" data-position="top" data-delay="50"

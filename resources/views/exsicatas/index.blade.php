@@ -28,18 +28,23 @@
     <div class="divider"></div>
     <div class="card-panel">
         <div class="row">
-            <form>
+            <form method="POST" action="{{ route('exsicatas.filtrar') }}">
                 <div class="input-field col s12 m12 l4">
                     <select required name="tipo">
                         <option value="" disabled selected>Filtrar por...</option>
-                        <option value="nascimento">BDD</option>
-                        <option value="nome">Coletor</option>
-                        <option value="nascimento">Determinador</option>
-                        <option value="nascimento">Escaninho</option>
-                        <option value="id">Espécime</option>
-                        <option value="nascimento">Localização</option>
-                        <option value="nascimento">Número</option>
-                        <option value="nascimento">Quantidade</option>
+                        <option value="bdd">BDD</option>
+                        <option value="coletor">Coletor</option>
+                        <option value="cidade">Cidade</option>
+                        <option value="estado">Estado</option>
+                        <option value="determinador">Determinador</option>
+                        <option value="epiteto">Epíteto</option>
+                        <option value="escaninho">Escaninho</option>
+                        <option value="familia">Família</option>
+                        <option value="genero">Genero</option>
+                        <option value="habitat">Habitat</option>
+                        <option value="local">Local</option>
+                        <option value="numero">Número</option>
+                        <option value="pais">País</option>
                     </select>
                     <label>Filtros</label>
                 </div>

@@ -35,7 +35,17 @@
                     @ability('admin,gerenciador,moderador', '')
                     <td>
                         <a class="modal-trigger tooltipped" data-position="top" data-delay="50"
-                           data-tooltip="Recuperar e salvar" href="{{route('soft-delete.familias.recovery', $data->id)}}"> <i class="small material-icons">save</i></a>
+                           data-tooltip="Recuperar e salvar"
+                           @if($tipo == "Epitetos")
+                           href="{{route('soft-delete.epitetos.recovery', $data->id)}}">
+                            @elseif($tipo == "Exsicatas")
+                           href="{{route('soft-delete.exsicatas.recovery', $data->id)}}">
+                            @elseif($tipo == "Generos")
+                           href="{{route('soft-delete.generos.recovery', $data->id)}}">
+                            @elseif($tipo == "Familias")
+                           href="{{route('soft-delete.familias.recovery', $data->id)}}">
+                            @endif
+                            <i class="small material-icons">save</i></a>
                     </td>
                     @endability
                     @empty

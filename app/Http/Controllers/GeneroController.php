@@ -97,4 +97,14 @@ class GeneroController extends Controller
         Genero::withTrashed()->where('id', $id)->restore();
         return redirect()->route('soft-delete.generos');
     }
+
+    public function filtrar(Request $request)
+    {
+        $dataForm = $request->all();
+        if ($dataForm['tipo'] == 'nome') {
+            $filtro = '%' . $dataForm['search'] . '%';
+            $data = Genero::where('name', 'like', $filtro)->paginate(10);
+        }
+        return view('genero.index', compact('data'));
+    }
 }

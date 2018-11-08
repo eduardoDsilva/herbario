@@ -11,12 +11,12 @@ class Exsicata extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     use SoftDeletes;
 
-    protected $fillable = ['numero', 'name', 'autor', 'escaninho', 'coletor', 'data', 'determinador', 'quantidade', 'bdd', 'image', 'genero_id', 'familia_id', 'epiteto_id'
+    protected $fillable = ['numero', 'name', 'autor', 'escaninho', 'coletor', 'data', 'determinador', 'quantidade', 'bdd', 'image', 'genero_id', 'familia_id', 'epiteto_id',
     ];
 
     public function endereco()
     {
-        return $this->hasOne(Endereco::class);
+        return $this->belongsTo(Endereco::class);
     }
 
     public function familia()

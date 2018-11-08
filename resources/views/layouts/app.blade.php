@@ -184,15 +184,17 @@
             url: form_action,
             data: {name: name}
         }).done(function (data) {
-
             var newRow = $("<tr id="+data.id+">");
             var cols = "";
             cols += '<td>'+data.name+'</td>';
             cols += '<td>'+0+'</td>';
             cols += '<td><a class="btn tooltipped" data-position="top" data-delay="50" data-tooltip="Exsicatas" href="/epitetos/'+data.id+'">Exsicatas</a></td>';
-            cols += '<td><a data-target="edit-item" class="modal-trigger tooltipped" id="epitetos-edit" data-position="top" data-delay="50" data-tooltip="Editar" href="#edit-item" data-id="'+data.id+'" data-name="'+data.name+'"> <i class="small material-icons">edit</i></a> <a data-target="delete-item" class="modal-trigger tooltipped" id="epitetos-delete" data-position="top" data-delay="50" data-tooltip="Deletar" href="#delete-item" data-id="'+data.id+'" data-name="'+data.name+'"> <i class="small material-icons">delete</i></a> </td>';
+            cols += '<td><a data-target="edit-item" class="modal-trigger tooltipped" id="epitetos-edit" data-position="top" data-delay="50" data-tooltip="Editar" href="#edit-item" data-id="'+data.id+'" data-name="'+data.name+'"> <i class="small material-icons">edit</i></a> <a data-target="delete-item" class="modal-trigger tooltipped" id="epitetos-delete" data-position="top" data-delay="50" data-tooltip="Deletar" href="#delete-item" data-id="'+data.id+'" data-name="'+data.name+'"> <i class="small material-icons">delete</i></a> <a class="tooltipped" data-position="top" data-delay="50" data-tooltip="Relatório" target="_blank" href="/relatorios/epitetos/'+data.id+'"><i class="small material-icons">chrome_reader_mode</i></a> </td>';
             newRow.append(cols);
             $("#table").append(newRow);
+            var Modalelem = document.querySelector('#create-item');
+            var instance = M.Modal.getInstance(Modalelem);
+            instance.close();
             M.toast({html: data.name + ' criado com sucesso!'});
         });
     });
@@ -208,8 +210,10 @@
             url: form_action,
             data: {id: id, name: name}
         }).done(function (data) {
-            $("#" + id +'-name').empty();
-            $("#" + id +'-name').append(data.name);
+            $("#" + id +'-name').empty().append(data.name);
+            var Modalelem = document.querySelector('#edit-item');
+            var instance = M.Modal.getInstance(Modalelem);
+            instance.close();
             M.toast({html: 'Atualizado com sucesso!'});
         });
     });
@@ -225,6 +229,9 @@
             data: {id: id}
         }).done(function () {
             $("#" + id).remove();
+            var Modalelem = document.querySelector('#delete-item');
+            var instance = M.Modal.getInstance(Modalelem);
+            instance.close();
             M.toast({html: 'Deletado com sucesso!'});
         });
     });

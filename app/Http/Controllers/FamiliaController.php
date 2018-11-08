@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exsicata;
 use App\Familia;
+use App\Genero;
 use Illuminate\Http\Request;
 
 class FamiliaController extends Controller
@@ -96,5 +97,15 @@ class FamiliaController extends Controller
     {
         Familia::withTrashed()->where('id', $id)->restore();
         return redirect()->route('soft-delete.familias');
+    }
+
+    public function filtrar(Request $request)
+    {
+        $dataForm = $request->all();
+        if ($dataForm['tipo'] == 'nome') {
+            $filtro = '%' . $dataForm['search'] . '%';
+            $data = Familia::where('name', 'like', $filtro)->paginate(10);
+        }
+        return view('familia.index', compact('data'));
     }
 }

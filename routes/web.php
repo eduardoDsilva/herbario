@@ -19,12 +19,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('epitetos', 'EpitetoController');
+Route::any('epitetos/filtrar', 'EpitetoController@filtrar')->name('epitetos.filtrar');
 
 Route::resource('familias', 'FamiliaController');
+Route::any('familias/filtrar', 'FamiliaController@filtrar')->name('familias.filtrar');
 
 Route::resource('generos', 'GeneroController');
+Route::any('generos/filtrar', 'GeneroController@filtrar')->name('generos.filtrar');
 
 Route::resource('exsicatas', 'ExsicataController');
+Route::any('exsicatas/filtrar', 'ExsicataController@filtrar')->name('exsicatas.filtrar');
 
 Route::get('/index-grade', 'ExsicataController@indexGrade')->name('exsicatas.index-grade');
 Route::get('/epiteto-tabela', 'EpitetoController@epiteto')->name('epiteto-tabela');

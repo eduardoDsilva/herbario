@@ -13,12 +13,11 @@
     <div class="divider"></div>
     <div class="card-panel">
         <div class="row">
-            <form>
+            <form method="POST" action="{{ route('epitetos.filtrar') }}">
                 <div class="input-field col s12 m12 l4">
                     <select required name="tipo">
                         <option value="" disabled selected>Filtrar por...</option>
-                        <option value="nascimento">Nome</option>
-                        <option value="nome">Quantidade</option>
+                        <option value="nome">Nome</option>
                     </select>
                     <label>Filtros</label>
                 </div>

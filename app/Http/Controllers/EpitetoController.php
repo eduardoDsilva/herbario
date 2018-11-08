@@ -19,7 +19,8 @@ class EpitetoController extends Controller
         return view('epiteto.index', compact('data'));
     }
 
-    public function epiteto(){
+    public function epiteto()
+    {
         $data = Epiteto::with(['exsicata'])->orderBy('name', 'asc')->get();
         return response()->json($data);
     }
@@ -27,7 +28,7 @@ class EpitetoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -39,7 +40,7 @@ class EpitetoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -52,7 +53,7 @@ class EpitetoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -64,8 +65,8 @@ class EpitetoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -78,14 +79,14 @@ class EpitetoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {
         Epiteto::find($request->all()['id'])->delete();
         $exsicata = Exsicata::where('epiteto_id', '=', $request->all()['id'])->get();
-        foreach($exsicata as $data){
+        foreach ($exsicata as $data) {
             $data->delete();
         }
         return response()->json('ok');
@@ -94,12 +95,22 @@ class EpitetoController extends Controller
     /**
      * Recovers a previously deleted record
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function recovery($id)
     {
         Epiteto::withTrashed()->where('id', $id)->restore();
         return redirect()->route('soft-delete.epitetos');
+    }
+
+    public function filtrar(Request $request)
+    {
+        $dataForm = $request->all();
+        if ($dataForm['tipo'] == 'nome') {
+            $filtro = '%' . $dataForm['search'] . '%';
+            $data = Epiteto::where('name', 'like', $filtro)->paginate(10);
+        }
+        return view('epiteto.index', compact('data'));
     }
 }

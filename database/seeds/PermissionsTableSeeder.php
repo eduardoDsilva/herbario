@@ -12,7 +12,6 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
         \DB::table('permissions')->delete();
         
@@ -117,7 +116,6 @@ class PermissionsTableSeeder extends Seeder
                 'updated_at' => '2018-10-04 12:32:49',
             ),
         ));
-        
-        
+
     }
 }

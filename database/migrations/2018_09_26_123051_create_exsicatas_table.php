@@ -31,6 +31,8 @@ class CreateExsicatasTable extends Migration
             $table->foreign('epiteto_id')->references('id')->on('epitetos')->onDelete('cascade');
             $table->unsignedInteger('familia_id')->default(1);
             $table->foreign('familia_id')->references('id')->on('familias')->onDelete('cascade');
+            $table->unsignedInteger('endereco_id')->nullable();
+            $table->foreign('endereco_id')->references('id')->on('enderecos')->onDelete('set null');
             $table->softDeletes();
             $table->timestamps();
         });

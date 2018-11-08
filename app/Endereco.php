@@ -12,11 +12,11 @@ class Endereco extends Model implements Auditable
     use SoftDeletes;
 
     protected $fillable = [
-        'municipio', 'uf', 'pais', 'local', 'latitude', 'longitude', 'habitat', 'observacao', 'exsicata_id',
+        'municipio', 'uf', 'pais', 'local', 'latitude', 'longitude', 'habitat', 'observacao',
     ];
 
     public function exsicata()
     {
-        return $this->belongsTo(Exsicata::class);
+        return $this->hasOne(Exsicata::class);
     }
 }
