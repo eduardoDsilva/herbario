@@ -3,7 +3,6 @@
 @section('titulo', 'Cadastrar exsicata')
 @section('breadcrumb')
     <a href="{{route('home')}}" class="breadcrumb">Home</a>
-    <a href="{{route('herbario')}}" class="breadcrumb">Herbário Virtual</a>
     <a href="{{route('exsicatas.index')}}" class="breadcrumb">Exsicatas</a>
     <a href="{{route('exsicatas.create')}}" class="breadcrumb">Cadastrar exsicata</a>
 @endsection

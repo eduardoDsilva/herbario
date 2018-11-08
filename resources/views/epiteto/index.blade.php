@@ -3,7 +3,6 @@
 @section('titulo', 'Epitetos')
 @section('breadcrumb')
     <a href="{{route('home')}}" class="breadcrumb">Home</a>
-    <a href="{{route('herbario')}}" class="breadcrumb">Herbário Virtual</a>
     <a href="{{route('epitetos.index')}}" class="breadcrumb">Epitetos</a>
 @endsection
 @section('content')
