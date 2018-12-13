@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\meuResetDeSenha;
 use Illuminate\Notifications\Notifiable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
@@ -29,6 +30,11 @@ class User extends Authenticatable implements Auditable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new meuResetDeSenha($token));
+    }
 
     public function role()
     {

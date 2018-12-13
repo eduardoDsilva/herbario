@@ -36,8 +36,9 @@
 
 <div class="header">
     <img src="{{public_path('images/LOGO_PMSL.png')}}" class="pmsl">
+
+    <img src="{{public_path('images/logo_herbario.jpg')}}" style="float:right">
 </div>
-<h1>Exsicatas da família {{$familia->name}}</h1>
 @foreach($exsicatas as $exsicata)
     <h2>Dados da Exsicata</h2>
     <hr>
@@ -62,7 +63,7 @@
         <li>BDD: {{$exsicata->bdd}}</li>
     </ul>
 
-    <h2>Dados do endereço</h2>
+    <h2>Localização</h2>
     <hr>
     <ul>
         <li>Municipio: {{$exsicata->endereco->municipio}}</li>
@@ -74,6 +75,8 @@
         <li>Habitat: {{$exsicata->endereco->habitat}}</li>
         <li>Observação: {{$exsicata->endereco->observacao}}</li>
     </ul>
+    <img width="540" height="540"
+         src="{{public_path(str_after($exsicata->qrcode, 'https://herbario.saoleopoldo.rs.gov.br/'))}}" style="float:right">
     <div class="page-break"></div>
 @endforeach
 </body>

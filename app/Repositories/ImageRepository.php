@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Repositories;
+
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image as Image;
 
@@ -7,26 +9,30 @@ class ImageRepository
 {
     public function saveImage($image, $id, $type, $size)
     {
-        if (!is_null($image))
-        {
+        if (!is_null($image)) {
             $file = $image;
             $extension = $image->getClientOriginalExtension();
-            $fileName = time() . random_int(100, 999) .'.' . $extension;
-            $destinationPath = public_path('images/'.$type.'/');
-            $url = 'http://'.$_SERVER['HTTP_HOST'].'/images/'.$type.'/'.$fileName;
-            $fullPath = $destinationPath.$fileName;
+            $fileName = time() . random_int(100, 999) . '.' . $extension;
+            $destinationPath = public_path('images/' . $type . '/');
+            $url = 'https://' . $_SERVER['HTTP_HOST'] . '/images/' . $type . '/' . $fileName;
+            $fullPath = $destinationPath . $fileName;
             if (!file_exists($destinationPath)) {
                 File::makeDirectory($destinationPath, 0775);
             }
-            $image = Image::make($file)
-                ->resize($size, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->encode('jpg');
+            if (filesize($image) > 1000000) {
+                $image = Image::make($file)
+                    ->resize($size, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })
+                    ->encode('jpg');
+            } else {
+                $image = Image::make($file)
+                    ->encode('jpg');
+            }
             $image->save($fullPath, 100);
             return $url;
         } else {
-            return 'http://'.$_SERVER['HTTP_HOST'].'/images/'.$type.'/placeholder300x300.jpg';
+            return 'https://' . $_SERVER['HTTP_HOST'] . '/images/placeholder300x300.jpg';
         }
     }
 }

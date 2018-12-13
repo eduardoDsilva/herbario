@@ -2,7 +2,6 @@
 
 @section('titulo', 'Epitetos')
 @section('breadcrumb')
-    <a href="{{route('home')}}" class="breadcrumb">Home</a>
     <a href="{{route('epitetos.index')}}" class="breadcrumb">Epitetos</a>
 @endsection
 @section('content')
@@ -36,7 +35,7 @@
             <thead>
             <tr>
                 <th>Nome</th>
-                <th>Quantidade de Exsicatas</th>
+                <th>Quantidade</th>
                 <th>Exsicatas</th>
                 <th>Ações</th>
             </tr>
@@ -80,7 +79,7 @@
 
     @ability('admin,gerenciador,moderador', '')
     <div class="fixed-action-btn">
-        <a data-target="create-item" class="btn-floating btn-large modal-trigger" href="#create-item">
+        <a data-target="create-item" class="btn-floating btn-large modal-trigger  tooltipped" data-position="left" data-delay="50" data-tooltip="Adicionar" href="#create-item">
             <i class="large material-icons">add</i>
         </a>
     </div>

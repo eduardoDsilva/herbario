@@ -74,7 +74,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $roles = Role::orderBy('name', 'asc')->get();
-        return view('configuration.user.edit', compact('user', 'roles'));
+        return view('admin.user.edit', compact('user', 'roles'));
     }
 
     /**
@@ -106,6 +106,6 @@ class UserController extends Controller
     {
         $dataForm = $request->all();
         User::find($dataForm['id'])->delete();
-        return redirect()->back();
+        return redirect()->route('users.index');
     }
 }

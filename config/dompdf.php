@@ -30,7 +30,7 @@ return array(
          * review your rights under the font license.
          *
          * Any font specification in the source HTML is translated to the closest font available
-         * in the font directory.
+         * in the font directory.f
          *
          * The pdf standard "Base 14 fonts" are:
          * Courier, Courier-Bold, Courier-BoldOblique, Courier-Oblique,
@@ -198,7 +198,7 @@ return array(
          *
          * @var bool
          */
-        "enable_php" => false,
+        "enable_php" => true,
 
         /**
          * Enable inline Javascript

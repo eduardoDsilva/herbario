@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Epiteto;
+use App\Exsicata;
+use App\Familia;
+use App\Genero;
+
 class HomeController extends Controller
 {
     /**
@@ -21,12 +26,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $exsicatas = count(Exsicata::all());
+        $epitetos = count(Epiteto::all());
+        $familias = count(Familia::all());
+        $generos = count(Genero::all());
+        return view('welcome', compact('familias', 'generos', 'epitetos', 'exsicatas'));
     }
 
-    public function herbario()
-    {
-        return view('herbario_virtual.index');
+    public function sobre(){
+        return view('sobre');
     }
 
 }

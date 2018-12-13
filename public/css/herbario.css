@@ -1,6 +1,7 @@
 body {
     background-color: #f0f0f0;
 }
+
 body {
     display: flex;
     min-height: 100vh;
@@ -9,4 +10,19 @@ body {
 
 main {
     flex: 1 0 auto;
+}
+
+.google-maps {
+    position: relative;
+    padding-bottom: 75%;
+/ / This is the aspect ratio height: 0;
+    overflow: hidden;
+}
+
+.google-maps iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
 }

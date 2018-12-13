@@ -11,11 +11,6 @@
 |
 */
 
-
-Route::get('/', function () {
-    return view('home');
-});
-
 Auth::routes();
 
 Route::resource('epitetos', 'EpitetoController');
@@ -33,7 +28,7 @@ Route::any('exsicatas/filtrar', 'ExsicataController@filtrar')->name('exsicatas.f
 Route::get('/index-grade', 'ExsicataController@indexGrade')->name('exsicatas.index-grade');
 Route::get('/epiteto-tabela', 'EpitetoController@epiteto')->name('epiteto-tabela');
 
-Route::group(['middleware' => ['role:gerenciador|moderador|admin']], function() {
+Route::group(['middleware' => ['role:gerenciador|moderador|admin']], function () {
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');
     Route::resource('configurations', 'ConfigurationController');
@@ -49,15 +44,32 @@ Route::group(['middleware' => ['role:gerenciador|moderador|admin']], function() 
     Route::get('/configuracao/registros-apagados/epitetos/recovery/{id}', 'EpitetoController@recovery')->name('soft-delete.epitetos.recovery');
 });
 
-Route::group(['middleware' => ['role:admin|moderador']], function() {
+Route::group(['middleware' => ['role:admin|moderador']], function () {
     Route::resource('audits', 'AuditController');
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
-    Route::get('decompose','\Lubusin\Decomposer\Controllers\DecomposerController@index');
+    Route::get('decompose', '\Lubusin\Decomposer\Controllers\DecomposerController@index');
+
+    Route::get('clear-cache', function () {
+        Artisan::call('cache:clear');
+        return "Cache is cleared";
+    });
+
+    Route::get('config-cache', function () {
+        Artisan::call('config:cache');
+        return "Config cache";
+    });
+
+    Route::get('view-cache', function () {
+        Artisan::call('view:clear');
+        return "View is cleared";
+    });
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/relatorios/exsicatas/{id}', 'ExsicataPdfController@exsicataPdf')->name('relatorios-exsicata');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/sobre', 'HomeController@sobre')->name('sobre');
+Route::post('/relatorios/exsicatas', 'ExsicataPdfController@exsicataPdf')->name('relatorios-exsicata');
 Route::get('/relatorios/epitetos/{id}', 'EpitetoPdfController@exsicataPdf')->name('relatorios-epiteto');
 Route::get('/relatorios/generos/{id}', 'GeneroPdfController@exsicataPdf')->name('relatorios-genero');
 Route::get('/relatorios/familias/{id}', 'FamiliaPdfController@exsicataPdf')->name('relatorios-familia');
+Route::get('/relatorios/etiquetas', 'ExsicataPdfController@etiquetas')->name('relatorios-etiquetas');
+Route::get('/relatorios/etiqueta/{id}', 'ExsicataPdfController@etiqueta')->name('relatorios-etiqueta');

@@ -153,6 +153,11 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Skydiver\LaravelMaterializeCSS\MaterializeCSSServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Arcanedev\NoCaptcha\NoCaptchaServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        LaravelQRCode\Providers\QRCodeServiceProvider::class,
+
+
 
         /*
          * Package Service Providers...
@@ -218,7 +223,11 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'MaterializeCSS' => Skydiver\LaravelMaterializeCSS\MaterializeCSS::class,
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Captcha' => Arcanedev\NoCaptcha\Facades\NoCaptcha::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'QRCode' => LaravelQRCode\Facades\QRCode::class,
     ],
 
 ];

@@ -21,6 +21,7 @@
                                     <label for="password">Senha</label>
                                 </div>
                             </div>
+                            {!! Form::captcha() !!}
                             <div class="divider"></div>
                             <div class="row">
                                 <div class="col m12">

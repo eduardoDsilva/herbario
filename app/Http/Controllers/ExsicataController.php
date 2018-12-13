@@ -9,6 +9,7 @@ use App\Familia;
 use App\Genero;
 use App\Repositories\ImageRepository;
 use Illuminate\Http\Request;
+use QR_Code\QR_Code;
 
 class ExsicataController extends Controller
 {
@@ -31,7 +32,7 @@ class ExsicataController extends Controller
      */
     public function indexGrade()
     {
-        $data = Exsicata::paginate(9);
+        $data = Exsicata::paginate(6);
         $table = false;
         return view('exsicatas.index', compact('data', 'table'));
     }
@@ -64,6 +65,10 @@ class ExsicataController extends Controller
             $exsicata->image = $repo->saveImage($request->img, $exsicata->id, 'exsicatas', 250);
             $exsicata->save();
         }
+        $fileName = time() . random_int(100, 999) . '.png';
+        QR_Code::png('herbario.saoleopoldo.rs.gov.br/exsicatas/' . $exsicata->id, 'images/qrcodes/' . $fileName);
+        $exsicata->qrcode = 'https://' . $_SERVER['HTTP_HOST'] . '/images/qrcodes/' . $fileName;
+        $exsicata->save();
         return redirect()->route('exsicatas.index');
     }
 
@@ -107,11 +112,15 @@ class ExsicataController extends Controller
         $exsicata->fill($request->all())->save();
         $exsicata->endereco->fill($request->all())->save();
         if ($request->hasFile('img')) {
-            $exsicata->image = $repo->saveImage($request->img, $exsicata->id, 'exsicatas', 1800);
-        }else{
-            $exsicata->image = "";
+            $this->deleteImage($exsicata->image);
+            $exsicata->image = $repo->saveImage($request->img, $exsicata->id, 'exsicatas', 1000);
+            $exsicata->save();
         }
-        $exsicata->save();
+        if (($request->apagaImg == "on") && (!$request->hasFile('img'))) {
+            $this->deleteImage($exsicata->image);
+            $exsicata->image = "";
+            $exsicata->save();
+        }
         return redirect()->route('exsicatas.index');
     }
 
@@ -123,10 +132,10 @@ class ExsicataController extends Controller
      */
     public function destroy(Request $request)
     {
-        $dataForm = $request->all();
-        $exsicata = Exsicata::find($dataForm['id']);
+        $exsicata = Exsicata::find($request->id);
+        $this->deleteImage($exsicata->image);
         $exsicata->delete();
-        return redirect()->back();
+        return redirect()->route('exsicatas.index');
     }
 
     /**
@@ -138,104 +147,92 @@ class ExsicataController extends Controller
     public function recovery($id)
     {
         Exsicata::withTrashed()->where('id', $id)->restore();
+        $exsicata = Exsicata::find($id);
+        $exsicata->image = '';
+        $exsicata->save();
         return redirect()->route('soft-delete.exsicatas');
     }
 
     public function filtrar(Request $request)
     {
-        $dataForm = $request->all();
-        switch ($dataForm['tipo']) {
-            case 'bdd':
-                $data = Exsicata::where('bdd', '=', $dataForm['search'])->paginate(10);
-                break;
-            case 'coletor':
-                $filtro = '%' . $dataForm['search'] . '%';
-                $data = Exsicata::where('coletor', 'like', $filtro)->paginate(10);
-                break;
-            case 'cidade':
-                $filtro = '%' . $dataForm['search'] . '%';
-                $cidade = Endereco::where('municipio', 'like', $filtro)->get();
-                $array[] = null;
-                foreach ($cidade as $id) {
-                    $array[] = $id->id;
-                }
-                $data = Exsicata::whereIn('endereco_id', $array)->paginate(10);
-                break;
-            case 'estado':
-                $filtro = '%' . $dataForm['search'] . '%';
-                $estado = Endereco::where('estado', 'like', $filtro)->get();
-                $array[] = null;
-                foreach ($estado as $id) {
-                    $array[] = $id->id;
-                }
-                $data = Exsicata::whereIn('endereco_id', $array)->paginate(10);
-                break;
-            case 'determinador':
-                $filtro = '%' . $dataForm['search'] . '%';
-                $data = Exsicata::where('determinador', 'like', $filtro)->paginate(10);
-                break;
-            case 'epiteto':
-                $filtro = '%' . $dataForm['search'] . '%';
-                $epiteto = Epiteto::where('name', 'like', $filtro)->get();
-                $array[] = null;
-                foreach ($epiteto as $id) {
-                    $array[] = $id->id;
-                }
-                $data = Exsicata::whereIn('epiteto_id', $array)->paginate(10);
-                break;
-            case 'escaninho':
-                $data = Exsicata::where('determinador', '=', $dataForm['search'])->paginate(10);
-                break;
-            case 'familia':
-                $filtro = '%' . $dataForm['search'] . '%';
-                $familia = Familia::where('name', 'like', $filtro)->get();
-                $array[] = null;
-                foreach ($familia as $id) {
-                    $array[] = $id->id;
-                }
-                $data = Exsicata::whereIn('familia_id', $array)->paginate(10);
-                break;
-            case 'genero':
-                $filtro = '%' . $dataForm['search'] . '%';
-                $genero = Genero::where('name', 'like', $filtro)->get();
-                $array[] = null;
-                foreach ($genero as $id) {
-                    $array[] = $id->id;
-                }
-                $data = Exsicata::whereIn('genero_id', $array)->paginate(10);
-                break;
-            case 'habitat':
-                $filtro = '%' . $dataForm['search'] . '%';
-                $habitat = Endereco::where('habitat', 'like', $filtro)->get();
-                $array[] = null;
-                foreach ($habitat as $id) {
-                    $array[] = $id->id;
-                }
-                $data = Exsicata::whereIn('endereco_id', $array)->paginate(10);
-                break;
-            case 'local':
-                $filtro = '%' . $dataForm['search'] . '%';
-                $local = Endereco::where('local', 'like', $filtro)->get();
-                $array[] = null;
-                foreach ($local as $id) {
-                    $array[] = $id->id;
-                }
-                $data = Exsicata::whereIn('endereco_id', $array)->paginate(10);
-                break;
-            case 'numero':
-                $data = Exsicata::where('numero', '=', $dataForm['search'])->paginate(10);
-                break;
-            case 'pais':
-                $filtro = '%' . $dataForm['search'] . '%';
-                $pais = Endereco::where('pais', 'like', $filtro)->get();
-                $array[] = null;
-                foreach ($pais as $id) {
-                    $array[] = $id->id;
-                }
-                $data = Exsicata::whereIn('endereco_id', $array)->paginate(10);
-                break;
-        }
+        $dataForm = array_filter($request->all());
+        $data = Exsicata::where(function ($query) use ($dataForm) {
+            if (array_key_exists('coletor', $dataForm)) {
+                $filtro = $dataForm['coletor'];
+                $query->where('coletor', "like", "%{$filtro}%");
+            }
+
+            if (array_key_exists('determinador', $dataForm)) {
+                $filtro = $dataForm['determinador'];
+                $query->where('determinador', 'like', "%{$filtro}%");
+            }
+
+            if (array_key_exists('escaninho', $dataForm)) {
+                $filtro = $dataForm['escaninho'];
+                $query->where('escaninho', "like", "%{$filtro}%");
+            }
+
+            if (array_key_exists('numero', $dataForm)) {
+                $filtro = $dataForm['numero'];
+                $query->where('numero', "=", $filtro);
+            }
+
+            if (array_key_exists('municipio', $dataForm)) {
+                $filtro = $dataForm['municipio'];
+                $municipio = Endereco::where('municipio', 'like', "%{$filtro}%")->get();
+                $query->whereIn('endereco_id', $this->percorrerArray($municipio));
+            }
+
+            if (array_key_exists('estado', $dataForm)) {
+                $filtro = $dataForm['estado'];
+                $estado = Endereco::where('uf', 'like', "%{$filtro}%")->get();
+                $query->whereIn('endereco_id', $this->percorrerArray($estado));
+            }
+
+            if (array_key_exists('epiteto', $dataForm)) {
+                $filtro = $dataForm['epiteto'];
+                $epiteto = Epiteto::where('name', 'like', "%{$filtro}%")->get();
+                $query->whereIn('epiteto_id', $this->percorrerArray($epiteto));
+            }
+
+            if (array_key_exists('familia', $dataForm)) {
+                $filtro = $dataForm['familia'];
+                $familia = Familia::where('name', 'like', "%{$filtro}%")->get();
+                $query->whereIn('familia_id', $this->percorrerArray($familia));
+            }
+
+            if (array_key_exists('genero', $dataForm)) {
+                $filtro = $dataForm['genero'];
+                $genero = Genero::where('name', 'like', "%{$filtro}%")->get();
+                $query->whereIn('genero_id', $this->percorrerArray($genero));
+            }
+
+            if (array_key_exists('habitat', $dataForm)) {
+                $filtro = $dataForm['habitat'];
+                $habitat = Endereco::where('habitat', 'like', "%{$filtro}%")->get();
+                $query->whereIn('endereco_id', $this->percorrerArray($habitat));
+            }
+
+        })
+            ->paginate(9);
         $table = true;
         return view('exsicatas.index', compact('data', 'table'));
+    }
+
+    private function deleteImage($imagem)
+    {
+        $caminhoImagem = str_replace('https://' . $_SERVER['HTTP_HOST'] . '/', "", $imagem);
+        if (($caminhoImagem != "") && ($caminhoImagem != "images/exsictas/placeholder300x300.jpg")) {
+            unlink($caminhoImagem);
+        }
+    }
+
+    private function percorrerArray($data)
+    {
+        $array[] = null;
+        foreach ($data as $id) {
+            $array[] = $id->id;
+        }
+        return $array;
     }
 }

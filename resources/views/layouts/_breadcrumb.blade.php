@@ -6,6 +6,7 @@
             <div class="nav-wrapper">
                 <div class="col s12">
                     <div style="margin-left: 25px">
+                        <a href="{{route('home')}}" class="breadcrumb">          Home</a>
                         @yield('breadcrumb')
                     </div>
                 </div>

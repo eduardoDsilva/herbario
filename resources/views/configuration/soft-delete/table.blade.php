@@ -2,7 +2,6 @@
 
 @section('titulo', 'Registros deletados')
 @section('breadcrumb')
-    <a href="{{route('home')}}" class="breadcrumb">Home</a>
     <a href="{{route('configurations.index')}}" class="breadcrumb">Configurações</a>
     <a href="{{route('soft-delete.index')}}" class="breadcrumb">Registros deletados</a>
     <a href="" class="breadcrumb">{{$tipo}}</a>

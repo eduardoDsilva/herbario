@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
-@section('titulo', 'Epitetos')
+@section('titulo', 'Auditoria')
 @section('breadcrumb')
-    <a href="{{route('home')}}" class="breadcrumb">Home</a>
     <a href="{{route('configurations.index')}}" class="breadcrumb">Configurações</a>
     <a href="{{route('audits.index')}}" class="breadcrumb">Auditoria</a>
 @endsection

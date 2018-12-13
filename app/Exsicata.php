@@ -11,7 +11,7 @@ class Exsicata extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     use SoftDeletes;
 
-    protected $fillable = ['numero', 'name', 'autor', 'escaninho', 'coletor', 'data', 'determinador', 'quantidade', 'bdd', 'image', 'genero_id', 'familia_id', 'epiteto_id', 'endereco_id'
+    protected $fillable = ['numero', 'name', 'autor', 'escaninho', 'coletor', 'data', 'determinador', 'quantidade', 'bdd', 'image', 'qrcode', 'genero_id', 'familia_id', 'epiteto_id', 'endereco_id'
     ];
 
     public function endereco()
