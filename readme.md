@@ -17,7 +17,11 @@ Sistema em desenvolvimento do Herbário Municipal de São Leopoldo para o regist
 - **CRUD das Exsicatas**
 - **Importação dos dados da tabela Excel**
 - **Biblioteca de manipulação do zoom das imagens**
-- Importação de fotos para as exsicatas
+- **Importação de fotos para as exsicatas**
+- **Geração de relatórios**
+- **Geração de etiquetas**
+- **QRCodes**
+- **Fim**
 
 ## Instalação
 
@@ -27,5 +31,3 @@ Sistema em desenvolvimento do Herbário Municipal de São Leopoldo para o regist
 - php artisan migrate
 - php artisan db:seed
 - php artisan serve
-
-
