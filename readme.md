@@ -25,7 +25,7 @@ Sistema em desenvolvimento do Herbário Municipal de São Leopoldo para o regist
 
 ## Instalação
 
-- Baixe o repositório
+- Git pull
 - composer update
 - Configure o database no arquivo .env
 - php artisan migrate
