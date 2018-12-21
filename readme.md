@@ -31,3 +31,4 @@ Sistema em desenvolvimento do Herbário Municipal de São Leopoldo para o regist
 - php artisan migrate
 - php artisan db:seed
 - php artisan serve
+- Login inicial: usuário admin, senha admin
