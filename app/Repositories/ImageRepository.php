@@ -19,16 +19,8 @@ class ImageRepository
             if (!file_exists($destinationPath)) {
                 File::makeDirectory($destinationPath, 0775);
             }
-            if (filesize($image) > 1000000) {
-                $image = Image::make($file)
-                    ->resize($size, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    })
-                    ->encode('jpg');
-            } else {
-                $image = Image::make($file)
-                    ->encode('jpg');
-            }
+            $image = Image::make($file)
+                ->encode('jpg');
             $image->save($fullPath, 100);
             return $url;
         } else {

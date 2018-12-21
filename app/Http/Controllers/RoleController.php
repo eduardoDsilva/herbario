@@ -87,6 +87,7 @@ class RoleController extends Controller
         foreach($dataForm['permission'] as $permission){
             $role->attachPermission($permission);
         }
+        dd('ok');
         return redirect()->route("roles.index");
     }
 
